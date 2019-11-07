@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "f76a45ff-0b94-4c90-ac70-9567aca57737",
+		"name": "Biblia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Caixa de promessas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44340/api/CaixinhaPromessas",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44340",
+					"path": [
+						"api",
+						"CaixinhaPromessas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Caixa de promessas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/api/CaixinhaPromessas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"api",
+								"CaixinhaPromessas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVxhcGlcQ2FpeGluaGFQcm9tZXNzYXM=?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2019 03:47:54 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"versaoId\": 0,\n    \"livro\": {\n        \"nome\": \"Deuteronômio\",\n        \"testamentoId\": 1,\n        \"posicao\": 5,\n        \"id\": 5\n    },\n    \"capitulo\": 20,\n    \"numero\": 15,\n    \"texto\": \"Assim farás a todas as cidades que estiverem mais longe de ti, que não são das cidades destas nações.\",\n    \"id\": 5438\n}"
+				}
+			]
+		},
+		{
+			"name": "Livros",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44340/api/livros",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44340",
+					"path": [
+						"api",
+						"livros"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Livros",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/api/livros",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"api",
+								"livros"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVxhcGlcbGl2cm9z?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2019 03:47:50 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"nome\": \"Gênesis\",\n        \"testamentoId\": 1,\n        \"posicao\": 1,\n        \"id\": 1\n    },\n    {\n        \"nome\": \"Êxodo\",\n        \"testamentoId\": 1,\n        \"posicao\": 2,\n        \"id\": 2\n    },\n    {\n        \"nome\": \"Levítico\",\n        \"testamentoId\": 1,\n        \"posicao\": 3,\n        \"id\": 3\n    },\n    {\n        \"nome\": \"Números\",\n        \"testamentoId\": 1,\n        \"posicao\": 4,\n        \"id\": 4\n    },\n    {\n        \"nome\": \"Deuteronômio\",\n        \"testamentoId\": 1,\n        \"posicao\": 5,\n        \"id\": 5\n    },\n    {\n        \"nome\": \"Josué\",\n        \"testamentoId\": 1,\n        \"posicao\": 6,\n        \"id\": 6\n    },\n    {\n        \"nome\": \"Juízes\",\n        \"testamentoId\": 1,\n        \"posicao\": 7,\n        \"id\": 7\n    },\n    {\n        \"nome\": \"Rute\",\n        \"testamentoId\": 1,\n        \"posicao\": 8,\n        \"id\": 8\n    },\n    {\n        \"nome\": \"I Samuel\",\n        \"testamentoId\": 1,\n        \"posicao\": 9,\n        \"id\": 9\n    },\n    {\n        \"nome\": \"II Samuel\",\n        \"testamentoId\": 1,\n        \"posicao\": 10,\n        \"id\": 10\n    },\n    {\n        \"nome\": \"I Reis\",\n        \"testamentoId\": 1,\n        \"posicao\": 11,\n        \"id\": 11\n    },\n    {\n        \"nome\": \"II Reis\",\n        \"testamentoId\": 1,\n        \"posicao\": 12,\n        \"id\": 12\n    },\n    {\n        \"nome\": \"I Crônicas\",\n        \"testamentoId\": 1,\n        \"posicao\": 13,\n        \"id\": 13\n    },\n    {\n        \"nome\": \"II Crônicas\",\n        \"testamentoId\": 1,\n        \"posicao\": 14,\n        \"id\": 14\n    },\n    {\n        \"nome\": \"Esdras\",\n        \"testamentoId\": 1,\n        \"posicao\": 15,\n        \"id\": 15\n    },\n    {\n        \"nome\": \"Neemias\",\n        \"testamentoId\": 1,\n        \"posicao\": 16,\n        \"id\": 16\n    },\n    {\n        \"nome\": \"Ester\",\n        \"testamentoId\": 1,\n        \"posicao\": 17,\n        \"id\": 17\n    },\n    {\n        \"nome\": \"Jó\",\n        \"testamentoId\": 1,\n        \"posicao\": 18,\n        \"id\": 18\n    },\n    {\n        \"nome\": \"Salmos\",\n        \"testamentoId\": 1,\n        \"posicao\": 19,\n        \"id\": 19\n    },\n    {\n        \"nome\": \"Provérbios\",\n        \"testamentoId\": 1,\n        \"posicao\": 20,\n        \"id\": 20\n    },\n    {\n        \"nome\": \"Eclesiastes\",\n        \"testamentoId\": 1,\n        \"posicao\": 21,\n        \"id\": 21\n    },\n    {\n        \"nome\": \"Cântico dos Cânticos\",\n        \"testamentoId\": 1,\n        \"posicao\": 22,\n        \"id\": 22\n    },\n    {\n        \"nome\": \"Isaías\",\n        \"testamentoId\": 1,\n        \"posicao\": 23,\n        \"id\": 23\n    },\n    {\n        \"nome\": \"Jeremias\",\n        \"testamentoId\": 1,\n        \"posicao\": 24,\n        \"id\": 24\n    },\n    {\n        \"nome\": \"Lamentações Jeremias\",\n        \"testamentoId\": 1,\n        \"posicao\": 25,\n        \"id\": 25\n    },\n    {\n        \"nome\": \"Ezequiel\",\n        \"testamentoId\": 1,\n        \"posicao\": 26,\n        \"id\": 26\n    },\n    {\n        \"nome\": \"Daniel\",\n        \"testamentoId\": 1,\n        \"posicao\": 27,\n        \"id\": 27\n    },\n    {\n        \"nome\": \"Oséias\",\n        \"testamentoId\": 1,\n        \"posicao\": 28,\n        \"id\": 28\n    },\n    {\n        \"nome\": \"Joel\",\n        \"testamentoId\": 1,\n        \"posicao\": 29,\n        \"id\": 29\n    },\n    {\n        \"nome\": \"Amós\",\n        \"testamentoId\": 1,\n        \"posicao\": 30,\n        \"id\": 30\n    },\n    {\n        \"nome\": \"Obadias\",\n        \"testamentoId\": 1,\n        \"posicao\": 31,\n        \"id\": 31\n    },\n    {\n        \"nome\": \"Jonas\",\n        \"testamentoId\": 1,\n        \"posicao\": 32,\n        \"id\": 32\n    },\n    {\n        \"nome\": \"Miquéias\",\n        \"testamentoId\": 1,\n        \"posicao\": 33,\n        \"id\": 33\n    },\n    {\n        \"nome\": \"Naum\",\n        \"testamentoId\": 1,\n        \"posicao\": 34,\n        \"id\": 34\n    },\n    {\n        \"nome\": \"Habacuque\",\n        \"testamentoId\": 1,\n        \"posicao\": 35,\n        \"id\": 35\n    },\n    {\n        \"nome\": \"Sofonias\",\n        \"testamentoId\": 1,\n        \"posicao\": 36,\n        \"id\": 36\n    },\n    {\n        \"nome\": \"Ageu\",\n        \"testamentoId\": 1,\n        \"posicao\": 37,\n        \"id\": 37\n    },\n    {\n        \"nome\": \"Zacarias\",\n        \"testamentoId\": 1,\n        \"posicao\": 38,\n        \"id\": 38\n    },\n    {\n        \"nome\": \"Malaquias\",\n        \"testamentoId\": 1,\n        \"posicao\": 39,\n        \"id\": 39\n    },\n    {\n        \"nome\": \"Mateus\",\n        \"testamentoId\": 2,\n        \"posicao\": 1,\n        \"id\": 40\n    },\n    {\n        \"nome\": \"Marcos\",\n        \"testamentoId\": 2,\n        \"posicao\": 2,\n        \"id\": 41\n    },\n    {\n        \"nome\": \"Lucas\",\n        \"testamentoId\": 2,\n        \"posicao\": 3,\n        \"id\": 42\n    },\n    {\n        \"nome\": \"João\",\n        \"testamentoId\": 2,\n        \"posicao\": 4,\n        \"id\": 43\n    },\n    {\n        \"nome\": \"Atos\",\n        \"testamentoId\": 2,\n        \"posicao\": 5,\n        \"id\": 44\n    },\n    {\n        \"nome\": \"Romanos\",\n        \"testamentoId\": 2,\n        \"posicao\": 6,\n        \"id\": 45\n    },\n    {\n        \"nome\": \"I Coríntios\",\n        \"testamentoId\": 2,\n        \"posicao\": 7,\n        \"id\": 46\n    },\n    {\n        \"nome\": \"II Coríntios\",\n        \"testamentoId\": 2,\n        \"posicao\": 8,\n        \"id\": 47\n    },\n    {\n        \"nome\": \"Gálatas\",\n        \"testamentoId\": 2,\n        \"posicao\": 9,\n        \"id\": 48\n    },\n    {\n        \"nome\": \"Efésios\",\n        \"testamentoId\": 2,\n        \"posicao\": 10,\n        \"id\": 49\n    },\n    {\n        \"nome\": \"Filipenses\",\n        \"testamentoId\": 2,\n        \"posicao\": 11,\n        \"id\": 50\n    },\n    {\n        \"nome\": \"Colossenses\",\n        \"testamentoId\": 2,\n        \"posicao\": 12,\n        \"id\": 51\n    },\n    {\n        \"nome\": \"I Tessalonicenses\",\n        \"testamentoId\": 2,\n        \"posicao\": 13,\n        \"id\": 52\n    },\n    {\n        \"nome\": \"II Tessalonicenses\",\n        \"testamentoId\": 2,\n        \"posicao\": 14,\n        \"id\": 53\n    },\n    {\n        \"nome\": \"I Timóteo\",\n        \"testamentoId\": 2,\n        \"posicao\": 15,\n        \"id\": 54\n    },\n    {\n        \"nome\": \"II Timóteo\",\n        \"testamentoId\": 2,\n        \"posicao\": 16,\n        \"id\": 55\n    },\n    {\n        \"nome\": \"Tito\",\n        \"testamentoId\": 2,\n        \"posicao\": 17,\n        \"id\": 56\n    },\n    {\n        \"nome\": \"Filemom\",\n        \"testamentoId\": 2,\n        \"posicao\": 18,\n        \"id\": 57\n    },\n    {\n        \"nome\": \"Hebreus\",\n        \"testamentoId\": 2,\n        \"posicao\": 19,\n        \"id\": 58\n    },\n    {\n        \"nome\": \"Tiago\",\n        \"testamentoId\": 2,\n        \"posicao\": 20,\n        \"id\": 59\n    },\n    {\n        \"nome\": \"I Pedro\",\n        \"testamentoId\": 2,\n        \"posicao\": 21,\n        \"id\": 60\n    },\n    {\n        \"nome\": \"II Pedro\",\n        \"testamentoId\": 2,\n        \"posicao\": 22,\n        \"id\": 61\n    },\n    {\n        \"nome\": \"I João\",\n        \"testamentoId\": 2,\n        \"posicao\": 23,\n        \"id\": 62\n    },\n    {\n        \"nome\": \"II João\",\n        \"testamentoId\": 2,\n        \"posicao\": 24,\n        \"id\": 63\n    },\n    {\n        \"nome\": \"III João\",\n        \"testamentoId\": 2,\n        \"posicao\": 25,\n        \"id\": 64\n    },\n    {\n        \"nome\": \"Judas\",\n        \"testamentoId\": 2,\n        \"posicao\": 26,\n        \"id\": 65\n    },\n    {\n        \"nome\": \"Apocalipse\",\n        \"testamentoId\": 2,\n        \"posicao\": 27,\n        \"id\": 66\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Versoes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44340/api/versoes",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44340",
+					"path": [
+						"api",
+						"versoes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Versoes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/api/versoes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"api",
+								"versoes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVxhcGlcdmVyc29lcw==?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2019 03:47:47 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"nome\": \"Não Identificada\",\n        \"id\": 6\n    },\n    {\n        \"nome\": \"Almeida Revisada Imprensa Bíblica\",\n        \"id\": 1\n    },\n    {\n        \"nome\": \"Almeida Corrigida e Revisada Fiel\",\n        \"id\": 2\n    },\n    {\n        \"nome\": \"Nova Versão Internacional\",\n        \"id\": 3\n    },\n    {\n        \"nome\": \"Sociedade Bíblica Britânica\",\n        \"id\": 4\n    },\n    {\n        \"nome\": \"Almeida Revista e Atualizada\",\n        \"id\": 5\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Versiculo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44340/api/versao/4/livro/59/capitulo/3/numero/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44340",
+					"path": [
+						"api",
+						"versao",
+						"4",
+						"livro",
+						"59",
+						"capitulo",
+						"3",
+						"numero",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Versiculo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/api/versao/4/livro/59/capitulo/3/numero/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"api",
+								"versao",
+								"4",
+								"livro",
+								"59",
+								"capitulo",
+								"3",
+								"numero",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVxhcGlcdmVyc2FvXDRcbGl2cm9cNTlcY2FwaXR1bG9cM1xudW1lcm9cMw==?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2019 03:47:52 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"versaoId\": 4,\n    \"livro\": {\n        \"nome\": \"Tiago\",\n        \"testamentoId\": 2,\n        \"posicao\": 20,\n        \"id\": 59\n    },\n    \"capitulo\": 3,\n    \"numero\": 3,\n    \"texto\": \"Ora se pomos freios nas bocas dos cavalos para que nos obedeçam, também governamos todo o seu corpo.\",\n    \"id\": 149586\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}

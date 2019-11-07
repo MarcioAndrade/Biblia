@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System.Linq;
+using System.Threading.Tasks;
 using Biblia.Domain.Entidades;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,7 @@ namespace Biblia.Repositorio
         {
         }
 
-        public int CapitulosDoLivro(int id)
+        public async Task<int> CapitulosDoLivroAsync(int id)
         {
             using (Conexao)
             {
@@ -22,11 +23,11 @@ namespace Biblia.Repositorio
                                 FROM 
                                     Versiculos WHERE livroId = @cid";
 
-                return Conexao.QueryFirstOrDefault<int>(query, new { cid = id });
+                return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { cid = id });
             }
         }
 
-        public int VersiculosNoCapituloDoLivro(int idLivro, int idCapitulo)
+        public async Task<int> VersiculosNoCapituloDoLivroAsync(int idLivro, int idCapitulo)
         {
             using (Conexao)
             {
@@ -38,11 +39,11 @@ namespace Biblia.Repositorio
                                 WHERE 
                                     livroId = @lid AND capitulo = @cid";
 
-                return Conexao.QueryFirstOrDefault<int>(query, new { lid = idLivro, cid = idCapitulo });
+                return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { lid = idLivro, cid = idCapitulo });
             }
         }
 
-        public IEnumerable<Livro> ListarTodos()
+        public async Task<IEnumerable<Livro>> ListarTodosAsync()
         {
             using (Conexao)
             {
@@ -53,11 +54,11 @@ namespace Biblia.Repositorio
                                     Livros
                             ";
 
-                return Conexao.Query<Livro>(query);
+                return await Conexao.QueryAsync<Livro>(query);
             }
         }
 
-        public IEnumerable<Versao> Versoes()
+        public async Task<IEnumerable<Versao>> VersoesAsync()
         {
             using (Conexao)
             {
@@ -69,11 +70,11 @@ namespace Biblia.Repositorio
                                     Versoes
                             ";
 
-                return Conexao.Query<Versao>(query);
+                return await Conexao.QueryAsync<Versao>(query);
             }
         }
 
-        public Versiculo Obter(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<Versiculo> ObterAsync(int versaoId, int livroId, int capitulo, int numero)
         {
             using (Conexao)
             {
@@ -96,7 +97,7 @@ namespace Biblia.Repositorio
                                     id = @lid;
                             ";
 
-                using (var result = Conexao.QueryMultiple(query, new { vid = versaoId, lid = livroId, cid = capitulo, nid = numero }))
+                using (var result = await Conexao.QueryMultipleAsync(query, new { vid = versaoId, lid = livroId, cid = capitulo, nid = numero }))
                 {
                     var versiculo = result.Read<Versiculo>().First();
                     versiculo.Livro = result.Read<Livro>().Single();

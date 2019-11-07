@@ -1,4 +1,5 @@
 ﻿using Biblia.App.Interfaces;
+using System.Threading.Tasks;
 using Biblia.Domain.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -17,28 +18,28 @@ namespace Biblia.Controllers
 
         [HttpGet]
         [Route("api/CaixinhaPromessas")]
-        public ActionResult<Versiculo> CaixinhaPromessas()
+        public async Task<ActionResult<Versiculo>> CaixinhaPromessasAsync()
         {
-            return _bibliaApp.CaixinhaDePromessas();
+            return await _bibliaApp.CaixinhaDePromessasAsync();
         }
 
         [HttpGet]
         [Route("api/livros")]
-        public IEnumerable<Livro> ObterLivros()
+        public async Task<IEnumerable<Livro>> ObterLivrosAsync()
         {
-            return _bibliaApp.Livros();
+            return await _bibliaApp.LivrosAsync();
         }
 
         [HttpGet("api/versoes")]
-        public IEnumerable<Versao> Versoes()
+        public async Task<IEnumerable<Versao>> VersoesAsync()
         {
-            return _bibliaApp.Versoes();
+            return await _bibliaApp.VersoesAsync();
         }
 
         [HttpGet("api/versao/{versaoId}/livro/{livroId}/capitulo/{capitulo}/numero/{numero}")]
-        public Versiculo Versiculo(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<Versiculo> VersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
-            return _bibliaApp.ObterVersiculo(versaoId, livroId, capitulo, numero);
+            return await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
         }
     }
 }

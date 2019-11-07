@@ -1,6 +1,7 @@
 ﻿using System;
 using Biblia.Repositorio;
 using Biblia.App.Interfaces;
+using System.Threading.Tasks;
 using Biblia.Domain.Entidades;
 using System.Collections.Generic;
 
@@ -15,36 +16,37 @@ namespace Biblia.App
             _versiculoRepository = versiculoRepository;
         }
 
-        public Versiculo CaixinhaDePromessas()
+        public async Task<Versiculo> CaixinhaDePromessasAsync()
         {
             // 66 livros .:. Antigo Testamento = 39; Novo Testamento = 27
 
             var versao = new Random(DateTime.Now.Millisecond).Next(0, 5);
             var livro = new Random(DateTime.Now.Millisecond).Next(1, 66);
-            var capitulo = new Random(DateTime.Now.Millisecond).Next(1, _versiculoRepository.CapitulosDoLivro(livro));
-            var numeroVersiculo = new Random(DateTime.Now.Millisecond).Next(1, _versiculoRepository.VersiculosNoCapituloDoLivro(livro, capitulo));
 
-            var versiculo = _versiculoRepository.Obter(versao, livro, capitulo, numeroVersiculo);
+            var capitulosDoLivro = await _versiculoRepository.CapitulosDoLivroAsync(livro);
+            var capitulo = new Random(DateTime.Now.Millisecond).Next(1, capitulosDoLivro);
 
-            if (versiculo == null)
-                return null;
+            var versiculosNoCapitulo = await _versiculoRepository.VersiculosNoCapituloDoLivroAsync(livro, capitulo);
+            var numeroVersiculo = new Random(DateTime.Now.Millisecond).Next(1, versiculosNoCapitulo);
+
+            var versiculo = await _versiculoRepository.ObterAsync(versao, livro, capitulo, numeroVersiculo);
 
             return versiculo;
         }
 
-        public IEnumerable<Livro> Livros()
+        public async Task<IEnumerable<Livro>> LivrosAsync()
         {
-            return _versiculoRepository.ListarTodos();
+            return await _versiculoRepository.ListarTodosAsync();
         }
 
-        public IEnumerable<Versao> Versoes()
+        public async Task<IEnumerable<Versao>> VersoesAsync()
         {
-            return _versiculoRepository.Versoes();
+            return await _versiculoRepository.VersoesAsync();
         }
 
-        public Versiculo ObterVersiculo(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<Versiculo> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
-            return _versiculoRepository.Obter(versaoId, livroId, capitulo, numero);
+            return await _versiculoRepository.ObterAsync(versaoId, livroId, capitulo, numero);
         }
     }
 }

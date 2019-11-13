@@ -36,7 +36,8 @@ namespace Biblia.App
 
         public async Task<IEnumerable<Livro>> LivrosAsync()
         {
-            var livrosDynamic = await _versiculoRepository.ObterLivrosAsync(1);
+            //TODO: Colocar em cache
+            //var livrosDynamic = await _versiculoRepository.ObterLivrosAsync(1);
             
             return await _versiculoRepository.ListarTodosAsync();
         }

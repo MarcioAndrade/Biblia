@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Biblia
 {
@@ -32,6 +33,21 @@ namespace Biblia
             services.AddScoped<IBibliaApp, BibliaApp>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "Bíblia API",
+                    Version = "v1",
+                    Contact = new Contact
+                    {
+                        Email = "marcio281@gmail.com",
+                        Name = "Marcio Costa"
+                    },
+                    Description = "Biblia sagrada com 5 versões em português"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +64,12 @@ namespace Biblia
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bíblia API V1");
+            });
         }
     }
 }

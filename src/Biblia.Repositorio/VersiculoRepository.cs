@@ -58,6 +58,39 @@ namespace Biblia.Repositorio
             }
         }
 
+        public async Task<IEnumerable<dynamic>> ObterLivrosAsync(int versaoId)
+        {
+            using (Conexao)
+            {
+                const string query = @"
+                                        SELECT 
+                                	        t.Id AS testamentoId, 
+                                	        t.nome AS testamento, 
+                                            l.Id AS livroId, 
+                                            l.nome AS Livro, 
+                                            l.posicao, 
+                                            COUNT(DISTINCT(v.capitulo)) AS capitulos, 
+                                            COUNT(v.Id) AS versiculos
+                                        FROM 
+                                	        versiculos v
+                                        INNER JOIN 
+                                	        livros l ON v.livroId = l.Id
+                                        INNER JOIN 
+                                	        testamentos t ON l.testamentoId = t.Id
+                                        WHERE 
+                                	        v.versaoId = @vid 
+                                        GROUP BY  
+                                            t.Id, 
+                                            t.nome, 
+                                	        l.Id, 
+                                            l.nome, 
+                                            l.posicao
+                            ";
+
+                return await Conexao.QueryAsync<dynamic>(query, new { vid = versaoId });
+            }
+        }
+
         public async Task<IEnumerable<Versao>> VersoesAsync()
         {
             using (Conexao)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Biblia.App;
@@ -45,8 +46,15 @@ namespace Biblia
                         Email = "marcio281@gmail.com",
                         Name = "Marcio Costa"
                     },
-                    Description = "Biblia sagrada com 5 versões em português"
+                    Description = "Biblia sagrada com seis versões em português"
                 });
+
+                var basePath = AppContext.BaseDirectory;
+                var assemblyName = System.Reflection.Assembly.GetEntryAssembly().GetName().Name;
+                var fileName = Path.GetFileName(assemblyName + ".xml");
+                //Set the comments path for the swagger json and ui.
+
+                c.IncludeXmlComments(System.IO.Path.Combine(basePath, fileName));
             });
         }
 

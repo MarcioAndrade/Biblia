@@ -32,5 +32,11 @@
             <param name="numero">Versículo</param>
             <returns>Versículo buscado. Caso não encontre o versículo com os parâmetros passados retorna vazio</returns>
         </member>
+        <member name="M:Biblia.Controllers.VersiculosController.ObterResumoAsync(System.Int32)">
+            <summary>
+            Recurso retorna os livros do antigo e novo testamento
+            </summary>
+            <returns>Lista com identificador e a descrição dos livros</returns>
+        </member>
     </members>
 </doc>

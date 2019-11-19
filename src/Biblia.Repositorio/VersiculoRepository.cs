@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Biblia.Domain.Entidades;
@@ -17,13 +18,20 @@ namespace Biblia.Repositorio
         {
             using (Conexao)
             {
-                const string query = @"
+                try
+                {
+                    const string query = @"
                                 SELECT 
                                     MAX(capitulo) 
                                 FROM 
                                     Versiculos WHERE livroId = @cid";
 
-                return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { cid = id });
+                    return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { cid = id });
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
@@ -31,7 +39,9 @@ namespace Biblia.Repositorio
         {
             using (Conexao)
             {
-                const string query = @"
+                try
+                {
+                    const string query = @"
                                 SELECT 
                                     MAX(numero) 
                                 FROM 
@@ -39,7 +49,12 @@ namespace Biblia.Repositorio
                                 WHERE 
                                     livroId = @lid AND capitulo = @cid";
 
-                return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { lid = idLivro, cid = idCapitulo });
+                    return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { lid = idLivro, cid = idCapitulo });
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
@@ -47,22 +62,33 @@ namespace Biblia.Repositorio
         {
             using (Conexao)
             {
-                const string query = @"
+                try
+                {
+
+                    const string query = @"
                                 SELECT 
                                     id, testamentoId, posicao, nome 
                                 FROM 
                                     Livros
                             ";
 
-                return await Conexao.QueryAsync<Livro>(query);
+                    return await Conexao.QueryAsync<Livro>(query);
+
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
-        public async Task<IEnumerable<dynamic>> ObterLivrosAsync(int versaoId)
+        public async Task<IEnumerable<Resumo>> ObterResumoLivrosAsync(int versaoId)
         {
             using (Conexao)
             {
-                const string query = @"
+                try
+                {
+                    const string query = @"
                                         SELECT 
                                 	        t.Id AS testamentoId, 
                                 	        t.nome AS testamento, 
@@ -72,11 +98,11 @@ namespace Biblia.Repositorio
                                             COUNT(DISTINCT(v.capitulo)) AS capitulos, 
                                             COUNT(v.Id) AS versiculos
                                         FROM 
-                                	        versiculos v
+                                	        Versiculos v
                                         INNER JOIN 
-                                	        livros l ON v.livroId = l.Id
+                                	        Livros l ON v.livroId = l.Id
                                         INNER JOIN 
-                                	        testamentos t ON l.testamentoId = t.Id
+                                	        Testamentos t ON l.testamentoId = t.Id
                                         WHERE 
                                 	        v.versaoId = @vid 
                                         GROUP BY  
@@ -87,7 +113,12 @@ namespace Biblia.Repositorio
                                             l.posicao
                             ";
 
-                return await Conexao.QueryAsync<dynamic>(query, new { vid = versaoId });
+                    return await Conexao.QueryAsync<Resumo>(query, new { vid = versaoId });
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
@@ -95,7 +126,9 @@ namespace Biblia.Repositorio
         {
             using (Conexao)
             {
-                const string query = @"
+                try
+                {
+                    const string query = @"
                                 SELECT 
                                     id,
                                     nome
@@ -103,7 +136,12 @@ namespace Biblia.Repositorio
                                     Versoes
                             ";
 
-                return await Conexao.QueryAsync<Versao>(query);
+                    return await Conexao.QueryAsync<Versao>(query);
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
@@ -111,7 +149,9 @@ namespace Biblia.Repositorio
         {
             using (Conexao)
             {
-                const string query = @"
+                try
+                {
+                    const string query = @"
                                 SELECT 
                                     id, versaoId, capitulo, numero, texto 
                                 FROM 
@@ -130,12 +170,18 @@ namespace Biblia.Repositorio
                                     id = @lid;
                             ";
 
-                using (var result = await Conexao.QueryMultipleAsync(query, new { vid = versaoId, lid = livroId, cid = capitulo, nid = numero }))
-                {
-                    var versiculo = result.Read<Versiculo>().First();
-                    versiculo.Livro = result.Read<Livro>().Single();
+                    using (var result = await Conexao.QueryMultipleAsync(query, new { vid = versaoId, lid = livroId, cid = capitulo, nid = numero }))
+                    {
+                        var versiculo = result.Read<Versiculo>().First();
+                        versiculo.Livro = result.Read<Livro>().Single();
 
-                    return versiculo;
+                        return versiculo;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw;
                 }
             }
         }

@@ -10,5 +10,6 @@ namespace Biblia.App.Interfaces
         Task<IEnumerable<Livro>> LivrosAsync();
         Task<IEnumerable<Versao>> VersoesAsync();
         Task<Versiculo> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero);
+        Task<IEnumerable<Resumo>> ObterResumoLivrosAsync(int versaoId);
     }
 }

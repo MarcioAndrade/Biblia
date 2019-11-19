@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Biblia.App
 {
-    public class BibliaApp : IBibliaApp
+    public class BibliaApp : ServiceBase, IBibliaApp
     {
         private VersiculoRepository _versiculoRepository { get; }
 
@@ -36,8 +36,6 @@ namespace Biblia.App
 
         public async Task<IEnumerable<Livro>> LivrosAsync()
         {
-            //TODO: Colocar em cache
-            //var livrosDynamic = await _versiculoRepository.ObterLivrosAsync(1);
             
             return await _versiculoRepository.ListarTodosAsync();
         }
@@ -50,6 +48,11 @@ namespace Biblia.App
         public async Task<Versiculo> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
             return await _versiculoRepository.ObterAsync(versaoId, livroId, capitulo, numero);
+        }
+
+        public async Task<IEnumerable<Resumo>> ObterResumoLivrosAsync(int versaoId)
+        {
+            return await _versiculoRepository.ObterResumoLivrosAsync(versaoId);
         }
     }
 }

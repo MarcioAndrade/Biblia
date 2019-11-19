@@ -60,5 +60,15 @@ namespace Biblia.Controllers
         {
             return await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
         }
+
+        /// <summary>
+        /// Recurso retorna os livros do antigo e novo testamento
+        /// </summary>
+        /// <returns>Lista com identificador e a descrição dos livros</returns>
+        [HttpGet("Resumo/{versaoId}")]
+        public async Task<IEnumerable<Resumo>> ObterResumoLivrosAsync(int versaoId)
+        {
+            return await _bibliaApp.ObterResumoLivrosAsync(versaoId);
+        }
     }
 }

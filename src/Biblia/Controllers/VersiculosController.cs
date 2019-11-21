@@ -1,7 +1,6 @@
 ﻿using Biblia.App.DTO;
 using Biblia.App.Interfaces;
 using System.Threading.Tasks;
-using Biblia.Domain.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -67,7 +66,7 @@ namespace Biblia.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
         [HttpGet("Resumo/{versaoId}")]
-        public async Task<IEnumerable<Resumo>> ObterResumoLivrosAsync(int versaoId)
+        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId)
         {
             return await _bibliaApp.ObterResumoLivrosAsync(versaoId);
         }

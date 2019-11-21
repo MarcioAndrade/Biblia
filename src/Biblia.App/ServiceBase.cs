@@ -14,7 +14,6 @@ namespace Biblia.App
             {
                 cfg.CreateMap<Capitulo, CapituloViewModel>();
                 cfg.CreateMap<Livro, LivroViewModel>();
-                cfg.CreateMap<Resumo, ResumoViewModel>();
                 cfg.CreateMap<Versao, VersaoViewModel>();
                 cfg.CreateMap<Versiculo, VersiculoViewModel>();
             });

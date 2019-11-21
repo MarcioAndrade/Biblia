@@ -54,9 +54,10 @@ namespace Biblia.App.Servicos
             return Mapper.Map<VersiculoViewModel>(versiculo);
         }
 
-        public async Task<IEnumerable<Resumo>> ObterResumoLivrosAsync(int versaoId)
+        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId)
         {
-            return await _versiculoRepository.ObterResumoLivrosAsync(versaoId);
+            var resumoDynamic = await _versiculoRepository.ObterResumoLivrosAsync(versaoId);
+            return Mapper.Map<IEnumerable<ResumoViewModel>>(resumoDynamic);
         }
     }
 }

@@ -82,7 +82,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<Resumo>> ObterResumoLivrosAsync(int versaoId)
+        public async Task<IEnumerable<dynamic>> ObterResumoLivrosAsync(int versaoId)
         {
             using (Conexao)
             {
@@ -90,13 +90,13 @@ namespace Biblia.Repositorio
                 {
                     const string query = @"
                                         SELECT 
-                                	        t.Id AS testamentoId, 
-                                	        t.nome AS testamento, 
-                                            l.Id AS livroId, 
+                                	        t.Id AS TestamentoId, 
+                                	        t.nome AS Testamento, 
+                                            l.Id AS LivroId, 
                                             l.nome AS Livro, 
-                                            l.posicao, 
-                                            COUNT(DISTINCT(v.capitulo)) AS capitulos, 
-                                            COUNT(v.Id) AS versiculos
+                                            l.posicao AS Posicao, 
+                                            COUNT(DISTINCT(v.capitulo)) AS Capitulos, 
+                                            COUNT(v.Id) AS Versiculos
                                         FROM 
                                 	        Versiculos v
                                         INNER JOIN 
@@ -113,7 +113,7 @@ namespace Biblia.Repositorio
                                             l.posicao
                             ";
 
-                    return await Conexao.QueryAsync<Resumo>(query, new { vid = versaoId });
+                    return await Conexao.QueryAsync(query, new { vid = versaoId });
                 }
                 catch (Exception ex)
                 {

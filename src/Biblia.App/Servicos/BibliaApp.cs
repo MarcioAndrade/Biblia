@@ -1,9 +1,9 @@
 ﻿using System;
+using Biblia.App.DTO;
 using Biblia.Repositorio;
 using Biblia.App.Interfaces;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Biblia.App.DTO;
 
 namespace Biblia.App.Servicos
 {
@@ -53,9 +53,9 @@ namespace Biblia.App.Servicos
             return Mapper.Map<VersiculoViewModel>(versiculo);
         }
 
-        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId)
+        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId, int? testamentoId, int? livroId)
         {
-            var resumoDynamic = await _versiculoRepository.ObterResumoLivrosAsync(versaoId);
+            var resumoDynamic = await _versiculoRepository.ObterResumoLivrosAsync(versaoId, testamentoId, livroId);
             return Mapper.Map<IEnumerable<ResumoViewModel>>(resumoDynamic);
         }
     }

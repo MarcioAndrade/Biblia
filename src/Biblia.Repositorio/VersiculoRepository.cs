@@ -72,8 +72,7 @@ namespace Biblia.Repositorio
                                 ";
                     if (testamentoId.HasValue)
                     {
-                        query += $@"
-                                    WHERE 
+                        query += $@"WHERE 
                                         testamentoId = {testamentoId}
                                     ";
                     }
@@ -88,16 +87,16 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<dynamic>> ObterResumoLivrosAsync(int versaoId)
+        public async Task<IEnumerable<dynamic>> ObterResumoLivrosAsync(int versaoId, int? testamentoId, int? livroId)
         {
             using (Conexao)
             {
                 try
                 {
-                    const string query = @"
+                    var query = $@"
                                         SELECT 
-                                	        t.Id AS TestamentoId, 
-                                	        t.nome AS Testamento, 
+                                            t.Id AS TestamentoId, 
+                                            t.nome AS Testamento, 
                                             l.Id AS LivroId, 
                                             l.nome AS Livro, 
                                             l.posicao AS Posicao, 
@@ -111,13 +110,27 @@ namespace Biblia.Repositorio
                                 	        Testamentos t ON l.testamentoId = t.Id
                                         WHERE 
                                 	        v.versaoId = @vid 
-                                        GROUP BY  
+                                    ";
+
+                    if (testamentoId.HasValue)
+                    {
+                        query += $@"        AND t.Id = {testamentoId} 
+                                    ";
+                    }
+
+                    if (livroId.HasValue)
+                    {
+                        query += $@"        AND l.Id = {livroId} 
+                                    ";
+                    }
+
+                    query += $@"        GROUP BY  
                                             t.Id, 
                                             t.nome, 
                                 	        l.Id, 
                                             l.nome, 
                                             l.posicao
-                            ";
+                                ";
 
                     return await Conexao.QueryAsync(query, new { vid = versaoId });
                 }

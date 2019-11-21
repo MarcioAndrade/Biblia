@@ -6,7 +6,7 @@ namespace Biblia.Repositorio
 {
     public interface IVersiculoRepository
     {
-        Task<IEnumerable<Livro>> ListarTodosAsync();
+        Task<IEnumerable<Livro>> ListarTodosAsync(int? testamentoId);
         Task<IEnumerable<Versao>> VersoesAsync();
         Task<int> CapitulosDoLivroAsync(int id);
         Task<int> VersiculosNoCapituloDoLivroAsync(int idLivro, int idCapitulo);

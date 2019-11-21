@@ -10,7 +10,7 @@
             </summary>
             <returns>Versículo</returns>
         </member>
-        <member name="M:Biblia.Controllers.VersiculosController.ObterLivrosAsync">
+        <member name="M:Biblia.Controllers.VersiculosController.ObterLivrosAsync(System.Nullable{System.Int32})">
             <summary>
             Recurso retorna os livros do antigo e novo testamento
             </summary>

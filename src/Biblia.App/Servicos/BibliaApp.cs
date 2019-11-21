@@ -2,7 +2,6 @@
 using Biblia.Repositorio;
 using Biblia.App.Interfaces;
 using System.Threading.Tasks;
-using Biblia.Domain.Entidades;
 using System.Collections.Generic;
 using Biblia.App.DTO;
 
@@ -35,9 +34,9 @@ namespace Biblia.App.Servicos
             return Mapper.Map< VersiculoViewModel>(versiculo);
         }
 
-        public async Task<IEnumerable<LivroViewModel>> LivrosAsync()
+        public async Task<IEnumerable<LivroViewModel>> LivrosAsync(int? testamentoId)
         {
-            var livros = await _versiculoRepository.ListarTodosAsync();
+            var livros = await _versiculoRepository.ListarTodosAsync(testamentoId);
 
             return Mapper.Map<IEnumerable<LivroViewModel>>(livros);
         }

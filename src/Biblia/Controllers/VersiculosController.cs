@@ -32,9 +32,9 @@ namespace Biblia.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
         [HttpGet("livros")]
-        public async Task<IEnumerable<LivroViewModel>> ObterLivrosAsync()
+        public async Task<IEnumerable<LivroViewModel>> ObterLivrosAsync([FromQueryAttribute] int? testamentoId)
         {
-            return await _bibliaApp.LivrosAsync();
+            return await _bibliaApp.LivrosAsync(testamentoId);
         }
 
         /// <summary>

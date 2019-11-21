@@ -58,19 +58,25 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<Livro>> ListarTodosAsync()
+        public async Task<IEnumerable<Livro>> ListarTodosAsync(int? testamentoId)
         {
             using (Conexao)
             {
                 try
                 {
-
-                    const string query = @"
-                                SELECT 
-                                    id, testamentoId, posicao, nome 
-                                FROM 
-                                    Livros
-                            ";
+                    var query = $@"
+                                    SELECT 
+                                        id, testamentoId, posicao, nome 
+                                    FROM 
+                                        Livros
+                                ";
+                    if (testamentoId.HasValue)
+                    {
+                        query += $@"
+                                    WHERE 
+                                        testamentoId = {testamentoId}
+                                    ";
+                    }
 
                     return await Conexao.QueryAsync<Livro>(query);
 

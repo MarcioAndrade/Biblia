@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Biblia</name>
+    </assembly>
+    <members>
+        <member name="M:Biblia.Controllers.VersiculosController.CaixinhaPromessasAsync">
+            <summary>
+            Caixinha de promessas retorna de forma aleatória um versículo bíblico
+            </summary>
+            <returns>Versículo</returns>
+        </member>
+        <member name="M:Biblia.Controllers.VersiculosController.ObterLivrosAsync">
+            <summary>
+            Recurso retorna os livros do antigo e novo testamento
+            </summary>
+            <returns>Lista com identificador e a descrição dos livros</returns>
+        </member>
+        <member name="M:Biblia.Controllers.VersiculosController.VersoesAsync">
+            <summary>
+            Recurso retorna as versões disponíveis
+            </summary>
+            <returns>Lista com identificador e a descrição da versão</returns>
+        </member>
+        <member name="M:Biblia.Controllers.VersiculosController.VersiculoAsync(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Recurso retorna um versículo dada uma versão, livro, capítulo e o número do versículo
+            </summary>
+            <param name="versaoId">Versão de 1 a 6. Pode ser obtida pelo recurso api/versoes</param>
+            <param name="livroId">Número identificador do livro. Pode ser obtido pelo recurso api/livros</param>
+            <param name="capitulo">Capítulo do livro</param>
+            <param name="numero">Versículo</param>
+            <returns>Versículo buscado. Caso não encontre o versículo com os parâmetros passados retorna vazio</returns>
+        </member>
+        <member name="M:Biblia.Controllers.VersiculosController.ObterResumoLivrosAsync(System.Int32)">
+            <summary>
+            Recurso retorna os livros do antigo e novo testamento
+            </summary>
+            <returns>Lista com identificador e a descrição dos livros</returns>
+        </member>
+    </members>
+</doc>

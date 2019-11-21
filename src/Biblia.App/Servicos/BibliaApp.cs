@@ -4,6 +4,7 @@ using Biblia.App.Interfaces;
 using System.Threading.Tasks;
 using Biblia.Domain.Entidades;
 using System.Collections.Generic;
+using Biblia.App.DTO;
 
 namespace Biblia.App.Servicos
 {
@@ -16,7 +17,7 @@ namespace Biblia.App.Servicos
             _versiculoRepository = versiculoRepository;
         }
 
-        public async Task<Versiculo> CaixinhaDePromessasAsync()
+        public async Task<VersiculoViewModel> CaixinhaDePromessasAsync()
         {
             // 66 livros .:. Antigo Testamento = 39; Novo Testamento = 27
 
@@ -31,23 +32,26 @@ namespace Biblia.App.Servicos
 
             var versiculo = await _versiculoRepository.ObterAsync(versao, livro, capitulo, numeroVersiculo);
 
-            return versiculo;
+            return Mapper.Map< VersiculoViewModel>(versiculo);
         }
 
-        public async Task<IEnumerable<Livro>> LivrosAsync()
+        public async Task<IEnumerable<LivroViewModel>> LivrosAsync()
         {
-            
-            return await _versiculoRepository.ListarTodosAsync();
+            var livros = await _versiculoRepository.ListarTodosAsync();
+
+            return Mapper.Map<IEnumerable<LivroViewModel>>(livros);
         }
 
-        public async Task<IEnumerable<Versao>> VersoesAsync()
+        public async Task<IEnumerable<VersaoViewModel>> VersoesAsync()
         {
-            return await _versiculoRepository.VersoesAsync();
+            var versoes = await _versiculoRepository.VersoesAsync();
+            return Mapper.Map<IEnumerable<VersaoViewModel>>(versoes);
         }
 
-        public async Task<Versiculo> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<VersiculoViewModel> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
-            return await _versiculoRepository.ObterAsync(versaoId, livroId, capitulo, numero);
+            var versiculo = await _versiculoRepository.ObterAsync(versaoId, livroId, capitulo, numero);
+            return Mapper.Map<VersiculoViewModel>(versiculo);
         }
 
         public async Task<IEnumerable<Resumo>> ObterResumoLivrosAsync(int versaoId)

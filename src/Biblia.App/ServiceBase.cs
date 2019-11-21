@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Biblia.App.DTO;
+using Biblia.Domain.Entidades;
 
 namespace Biblia.App
 {
@@ -10,7 +12,11 @@ namespace Biblia.App
         {
             var mapperConfig = new MapperConfiguration(cfg =>
             {
-
+                cfg.CreateMap<Capitulo, CapituloViewModel>();
+                cfg.CreateMap<Livro, LivroViewModel>();
+                cfg.CreateMap<Resumo, ResumoViewModel>();
+                cfg.CreateMap<Versao, VersaoViewModel>();
+                cfg.CreateMap<Versiculo, VersiculoViewModel>();
             });
 
             Mapper = mapperConfig.CreateMapper();

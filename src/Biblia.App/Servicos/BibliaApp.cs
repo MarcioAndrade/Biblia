@@ -31,7 +31,7 @@ namespace Biblia.App.Servicos
 
             var versiculo = await _versiculoRepository.ObterVersiculoAsync(versao, livro, capitulo, numeroVersiculo);
 
-            return Mapper.Map< VersiculoViewModel>(versiculo);
+            return Mapper.Map<VersiculoViewModel>(versiculo);
         }
 
         public async Task<IEnumerable<LivroViewModel>> LivrosAsync(int? testamentoId)
@@ -57,6 +57,10 @@ namespace Biblia.App.Servicos
         {
             var resumoDynamic = await _versiculoRepository.ListarResumosLivrosAsync(versaoId, testamentoId, livroId);
             return Mapper.Map<IEnumerable<ResumoViewModel>>(resumoDynamic);
+        }
+        public async Task<int> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
+        {
+            return await _versiculoRepository.ObterQuantidadeVersiculosNoCapituloAsync(versaoId, livroId, capitulo);
         }
     }
 }

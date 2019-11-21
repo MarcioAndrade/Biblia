@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Biblia.Domain.Entidades;
 using System.Collections.Generic;
 
-namespace Biblia.App
+namespace Biblia.App.Servicos
 {
     public class BibliaApp : ServiceBase, IBibliaApp
     {

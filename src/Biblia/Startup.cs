@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Biblia.App;
-using Biblia.App.Interfaces;
 using Biblia.Repositorio;
+using Biblia.App.Servicos;
+using Biblia.App.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Biblia
 {
@@ -54,7 +48,7 @@ namespace Biblia
                 var fileName = Path.GetFileName(assemblyName + ".xml");
                 //Set the comments path for the swagger json and ui.
 
-                c.IncludeXmlComments(System.IO.Path.Combine(basePath, fileName));
+                c.IncludeXmlComments(Path.Combine(basePath, fileName));
             });
         }
 

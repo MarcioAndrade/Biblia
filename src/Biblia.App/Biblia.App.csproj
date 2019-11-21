@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Biblia.Repositorio\Biblia.Repositorio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Servicos\" />
-  </ItemGroup>
-
 </Project>

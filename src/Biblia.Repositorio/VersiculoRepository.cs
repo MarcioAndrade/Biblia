@@ -204,5 +204,32 @@ namespace Biblia.Repositorio
                 }
             }
         }
+
+        public async Task<int> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
+        {
+            using (Conexao)
+            {
+                try
+                {
+                    const string query = @"
+                                                SELECT     
+                                                    COUNT(v.Id) AS versiculos
+                                                FROM 
+                                                    Versiculos v
+                                                WHERE 
+                                                    v.versaoId = @vid
+                                                    AND v.livroId = @lid
+                                                    AND v.capitulo = @c
+                                            ";
+
+                    return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { vid = versaoId, lid = livroId, c = capitulo });
+
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

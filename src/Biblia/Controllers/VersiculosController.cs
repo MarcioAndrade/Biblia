@@ -70,5 +70,11 @@ namespace Biblia.Controllers
         {
             return await _bibliaApp.ObterResumoLivrosAsync(versaoId, testamentoId, livroId);
         }
+
+        [HttpGet("Versao/{versaoId}/Livro{livroId}/Capitulo/{capitulo}/quantidade-versiculos")]
+        public async Task<int> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
+        {
+            return await _bibliaApp.ObterQuantidadeVersiculosNoCapituloAsync(versaoId, livroId, capitulo);
+        }
     }
 }

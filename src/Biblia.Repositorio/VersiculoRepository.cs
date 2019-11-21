@@ -14,7 +14,7 @@ namespace Biblia.Repositorio
         {
         }
 
-        public async Task<int> CapitulosDoLivroAsync(int id)
+        public async Task<int> ObterQuantidadeCapitulosDoLivroAsync(int livroId)
         {
             using (Conexao)
             {
@@ -26,7 +26,7 @@ namespace Biblia.Repositorio
                                 FROM 
                                     Versiculos WHERE livroId = @cid";
 
-                    return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { cid = id });
+                    return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { cid = livroId });
                 }
                 catch (Exception ex)
                 {
@@ -35,7 +35,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<int> VersiculosNoCapituloDoLivroAsync(int idLivro, int idCapitulo)
+        public async Task<int> ObterQuantidadeVersiculosNoCapituloDoLivroAsync(int idLivro, int idCapitulo)
         {
             using (Conexao)
             {
@@ -58,7 +58,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<Livro>> ListarTodosAsync(int? testamentoId)
+        public async Task<IEnumerable<Livro>> ListarLivrosAsync(int? testamentoId)
         {
             using (Conexao)
             {
@@ -87,7 +87,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<dynamic>> ObterResumoLivrosAsync(int versaoId, int? testamentoId, int? livroId)
+        public async Task<IEnumerable<dynamic>> ListarResumosLivrosAsync(int versaoId, int? testamentoId, int? livroId)
         {
             using (Conexao)
             {
@@ -141,7 +141,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<Versao>> VersoesAsync()
+        public async Task<IEnumerable<Versao>> ListarVersoesAsync()
         {
             using (Conexao)
             {
@@ -164,7 +164,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<Versiculo> ObterAsync(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<Versiculo> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
             using (Conexao)
             {

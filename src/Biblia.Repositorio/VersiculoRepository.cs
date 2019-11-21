@@ -14,7 +14,7 @@ namespace Biblia.Repositorio
         {
         }
 
-        public async Task<int> CapitulosDoLivroAsync(int id)
+        public async Task<int> ObterQuantidadeCapitulosDoLivroAsync(int livroId)
         {
             using (Conexao)
             {
@@ -26,7 +26,7 @@ namespace Biblia.Repositorio
                                 FROM 
                                     Versiculos WHERE livroId = @cid";
 
-                    return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { cid = id });
+                    return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { cid = livroId });
                 }
                 catch (Exception ex)
                 {
@@ -35,7 +35,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<int> VersiculosNoCapituloDoLivroAsync(int idLivro, int idCapitulo)
+        public async Task<int> ObterQuantidadeVersiculosNoCapituloDoLivroAsync(int idLivro, int idCapitulo)
         {
             using (Conexao)
             {
@@ -58,19 +58,24 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<Livro>> ListarTodosAsync()
+        public async Task<IEnumerable<Livro>> ListarLivrosAsync(int? testamentoId)
         {
             using (Conexao)
             {
                 try
                 {
-
-                    const string query = @"
-                                SELECT 
-                                    id, testamentoId, posicao, nome 
-                                FROM 
-                                    Livros
-                            ";
+                    var query = $@"
+                                    SELECT 
+                                        id, testamentoId, posicao, nome 
+                                    FROM 
+                                        Livros
+                                ";
+                    if (testamentoId.HasValue)
+                    {
+                        query += $@"WHERE 
+                                        testamentoId = {testamentoId}
+                                    ";
+                    }
 
                     return await Conexao.QueryAsync<Livro>(query);
 
@@ -82,16 +87,16 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<dynamic>> ObterResumoLivrosAsync(int versaoId)
+        public async Task<IEnumerable<dynamic>> ListarResumosLivrosAsync(int versaoId, int? testamentoId, int? livroId)
         {
             using (Conexao)
             {
                 try
                 {
-                    const string query = @"
+                    var query = $@"
                                         SELECT 
-                                	        t.Id AS TestamentoId, 
-                                	        t.nome AS Testamento, 
+                                            t.Id AS TestamentoId, 
+                                            t.nome AS Testamento, 
                                             l.Id AS LivroId, 
                                             l.nome AS Livro, 
                                             l.posicao AS Posicao, 
@@ -105,13 +110,27 @@ namespace Biblia.Repositorio
                                 	        Testamentos t ON l.testamentoId = t.Id
                                         WHERE 
                                 	        v.versaoId = @vid 
-                                        GROUP BY  
+                                    ";
+
+                    if (testamentoId.HasValue)
+                    {
+                        query += $@"        AND t.Id = {testamentoId} 
+                                    ";
+                    }
+
+                    if (livroId.HasValue)
+                    {
+                        query += $@"        AND l.Id = {livroId} 
+                                    ";
+                    }
+
+                    query += $@"        GROUP BY  
                                             t.Id, 
                                             t.nome, 
                                 	        l.Id, 
                                             l.nome, 
                                             l.posicao
-                            ";
+                                ";
 
                     return await Conexao.QueryAsync(query, new { vid = versaoId });
                 }
@@ -122,7 +141,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<Versao>> VersoesAsync()
+        public async Task<IEnumerable<Versao>> ListarVersoesAsync()
         {
             using (Conexao)
             {
@@ -145,7 +164,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<Versiculo> ObterAsync(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<Versiculo> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
             using (Conexao)
             {

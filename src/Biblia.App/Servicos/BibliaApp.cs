@@ -1,10 +1,9 @@
 ﻿using System;
+using Biblia.App.DTO;
 using Biblia.Repositorio;
 using Biblia.App.Interfaces;
 using System.Threading.Tasks;
-using Biblia.Domain.Entidades;
 using System.Collections.Generic;
-using Biblia.App.DTO;
 
 namespace Biblia.App.Servicos
 {
@@ -24,39 +23,39 @@ namespace Biblia.App.Servicos
             var versao = new Random(DateTime.Now.Millisecond).Next(0, 5);
             var livro = new Random(DateTime.Now.Millisecond).Next(1, 66);
 
-            var capitulosDoLivro = await _versiculoRepository.CapitulosDoLivroAsync(livro);
+            var capitulosDoLivro = await _versiculoRepository.ObterQuantidadeCapitulosDoLivroAsync(livro);
             var capitulo = new Random(DateTime.Now.Millisecond).Next(1, capitulosDoLivro);
 
-            var versiculosNoCapitulo = await _versiculoRepository.VersiculosNoCapituloDoLivroAsync(livro, capitulo);
+            var versiculosNoCapitulo = await _versiculoRepository.ObterQuantidadeVersiculosNoCapituloDoLivroAsync(livro, capitulo);
             var numeroVersiculo = new Random(DateTime.Now.Millisecond).Next(1, versiculosNoCapitulo);
 
-            var versiculo = await _versiculoRepository.ObterAsync(versao, livro, capitulo, numeroVersiculo);
+            var versiculo = await _versiculoRepository.ObterVersiculoAsync(versao, livro, capitulo, numeroVersiculo);
 
             return Mapper.Map< VersiculoViewModel>(versiculo);
         }
 
-        public async Task<IEnumerable<LivroViewModel>> LivrosAsync()
+        public async Task<IEnumerable<LivroViewModel>> LivrosAsync(int? testamentoId)
         {
-            var livros = await _versiculoRepository.ListarTodosAsync();
+            var livros = await _versiculoRepository.ListarLivrosAsync(testamentoId);
 
             return Mapper.Map<IEnumerable<LivroViewModel>>(livros);
         }
 
         public async Task<IEnumerable<VersaoViewModel>> VersoesAsync()
         {
-            var versoes = await _versiculoRepository.VersoesAsync();
+            var versoes = await _versiculoRepository.ListarVersoesAsync();
             return Mapper.Map<IEnumerable<VersaoViewModel>>(versoes);
         }
 
         public async Task<VersiculoViewModel> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
-            var versiculo = await _versiculoRepository.ObterAsync(versaoId, livroId, capitulo, numero);
+            var versiculo = await _versiculoRepository.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
             return Mapper.Map<VersiculoViewModel>(versiculo);
         }
 
-        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId)
+        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId, int? testamentoId, int? livroId)
         {
-            var resumoDynamic = await _versiculoRepository.ObterResumoLivrosAsync(versaoId);
+            var resumoDynamic = await _versiculoRepository.ListarResumosLivrosAsync(versaoId, testamentoId, livroId);
             return Mapper.Map<IEnumerable<ResumoViewModel>>(resumoDynamic);
         }
     }

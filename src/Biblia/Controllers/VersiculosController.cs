@@ -32,9 +32,9 @@ namespace Biblia.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
         [HttpGet("livros")]
-        public async Task<IEnumerable<LivroViewModel>> ObterLivrosAsync()
+        public async Task<IEnumerable<LivroViewModel>> ObterLivrosAsync([FromQuery] int? testamentoId)
         {
-            return await _bibliaApp.LivrosAsync();
+            return await _bibliaApp.LivrosAsync(testamentoId);
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace Biblia.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
         [HttpGet("Resumo/{versaoId}")]
-        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId)
+        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId, [FromQuery] int? testamentoId, [FromQuery] int? livroId)
         {
-            return await _bibliaApp.ObterResumoLivrosAsync(versaoId);
+            return await _bibliaApp.ObterResumoLivrosAsync(versaoId, testamentoId, livroId);
         }
     }
 }

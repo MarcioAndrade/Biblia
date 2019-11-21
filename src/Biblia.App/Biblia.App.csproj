@@ -9,4 +9,12 @@
     <ProjectReference Include="..\Biblia.Repositorio\Biblia.Repositorio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Servicos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
 </Project>

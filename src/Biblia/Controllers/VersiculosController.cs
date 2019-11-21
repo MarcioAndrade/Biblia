@@ -1,6 +1,6 @@
-﻿using Biblia.App.Interfaces;
+﻿using Biblia.App.DTO;
+using Biblia.App.Interfaces;
 using System.Threading.Tasks;
-using Biblia.Domain.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -22,7 +22,7 @@ namespace Biblia.Controllers
         /// </summary>
         /// <returns>Versículo</returns>
         [HttpGet("CaixinhaPromessas")]
-        public async Task<ActionResult<Versiculo>> CaixinhaPromessasAsync()
+        public async Task<ActionResult<VersiculoViewModel>> CaixinhaPromessasAsync()
         {
             return await _bibliaApp.CaixinhaDePromessasAsync();
         }
@@ -32,7 +32,7 @@ namespace Biblia.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
         [HttpGet("livros")]
-        public async Task<IEnumerable<Livro>> ObterLivrosAsync()
+        public async Task<IEnumerable<LivroViewModel>> ObterLivrosAsync()
         {
             return await _bibliaApp.LivrosAsync();
         }
@@ -42,7 +42,7 @@ namespace Biblia.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição da versão</returns>
         [HttpGet("versoes")]
-        public async Task<IEnumerable<Versao>> VersoesAsync()
+        public async Task<IEnumerable<VersaoViewModel>> VersoesAsync()
         {
             return await _bibliaApp.VersoesAsync();
         }
@@ -56,9 +56,19 @@ namespace Biblia.Controllers
         /// <param name="numero">Versículo</param>
         /// <returns>Versículo buscado. Caso não encontre o versículo com os parâmetros passados retorna vazio</returns>
         [HttpGet("versao/{versaoId}/livro/{livroId}/capitulo/{capitulo}/numero/{numero}")]
-        public async Task<Versiculo> VersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<VersiculoViewModel> VersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
             return await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
+        }
+
+        /// <summary>
+        /// Recurso retorna os livros do antigo e novo testamento
+        /// </summary>
+        /// <returns>Lista com identificador e a descrição dos livros</returns>
+        [HttpGet("Resumo/{versaoId}")]
+        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId)
+        {
+            return await _bibliaApp.ObterResumoLivrosAsync(versaoId);
         }
     }
 }

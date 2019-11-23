@@ -153,6 +153,8 @@ namespace Biblia.Repositorio
                                     nome
                                 FROM 
                                     Versoes
+                                ORDER BY
+                                    id
                             ";
 
                     return await Conexao.QueryAsync<Versao>(query);

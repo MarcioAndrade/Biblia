@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Biblia.Repositorio
 {
-    public interface IVersiculoRepository
+    public interface IBibliaRepository
     {
         Task<IEnumerable<Livro>> ListarLivrosAsync(int? testamentoId);
         Task<IEnumerable<Versao>> ListarVersoesAsync();

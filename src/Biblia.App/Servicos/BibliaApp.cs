@@ -9,9 +9,9 @@ namespace Biblia.App.Servicos
 {
     public class BibliaApp : ServiceBase, IBibliaApp
     {
-        private VersiculoRepository _versiculoRepository { get; }
+        private BibliaRepository _versiculoRepository { get; }
 
-        public BibliaApp(VersiculoRepository versiculoRepository)
+        public BibliaApp(BibliaRepository versiculoRepository)
         {
             _versiculoRepository = versiculoRepository;
         }

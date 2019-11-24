@@ -6,13 +6,20 @@ using System.Collections.Generic;
 
 namespace Biblia.Controllers
 {
+    /// <summary>
+    /// API fornece recursos de consulta a livros, versículos e dados estatísticos em seis versões diferentes em português
+    /// </summary>
     [Route("v1/[controller]")]
     [ApiController]
-    public class VersiculosController : ControllerBase
+    public class BibliaController : ControllerBase
     {
         private IBibliaApp _bibliaApp { get; }
 
-        public VersiculosController(IBibliaApp bibliaApp)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bibliaApp">Parâmetro inserido por injeção de dependência. Pode ser usada para mockar os dados de consulta para teste</param>
+        public BibliaController(IBibliaApp bibliaApp)
         {
             _bibliaApp = bibliaApp;
         }
@@ -38,7 +45,7 @@ namespace Biblia.Controllers
         }
 
         /// <summary>
-        /// Recurso retorna as versões disponíveis
+        /// Recurso retorna as versões bíblicas disponíveis na API
         /// </summary>
         /// <returns>Lista com identificador e a descrição da versão</returns>
         [HttpGet("versoes")]
@@ -62,7 +69,9 @@ namespace Biblia.Controllers
         }
 
         /// <summary>
-        /// Recurso retorna os livros do antigo e novo testamento
+        /// Recurso retorna o resumo contando capítulos e versículos por livro. 
+        /// Pode ser filtrado por testamento através da proriedade testamentoId, sendo 1 - Para o antigo testamento e 2 - Para o novo testamento
+        /// Pode ser filtrado por livro através da propriedade livroId, passando o id do livro que se deseja o resumo
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
         [HttpGet("Resumo/{versaoId}")]
@@ -71,6 +80,13 @@ namespace Biblia.Controllers
             return await _bibliaApp.ObterResumoLivrosAsync(versaoId, testamentoId, livroId);
         }
 
+        /// <summary>
+        /// Recurso retorna a quantidade de versículos em um capítulo de um livro de uma versão
+        /// </summary>
+        /// <param name="versaoId">Versão de 1 a 6. Pode ser obtida pelo recurso api/versoes</param>
+        /// <param name="livroId">Número identificador do livro. Pode ser obtido pelo recurso api/livros</param>
+        /// <param name="capitulo">Capítulo do livro que deseja consultar</param>
+        /// <returns>Quantidade de versículos em capítulo</returns>
         [HttpGet("Versao/{versaoId}/Livro{livroId}/Capitulo/{capitulo}/quantidade-versiculos")]
         public async Task<int> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
         {

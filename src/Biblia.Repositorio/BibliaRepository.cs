@@ -8,9 +8,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Biblia.Repositorio
 {
-    public class VersiculoRepository : RepoBase, IVersiculoRepository
+    public class BibliaRepository : RepoBase, IBibliaRepository
     {
-        public VersiculoRepository(IConfiguration config) : base(config)
+        public BibliaRepository(IConfiguration config) : base(config)
         {
         }
 

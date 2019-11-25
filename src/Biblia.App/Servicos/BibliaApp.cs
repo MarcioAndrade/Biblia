@@ -19,8 +19,6 @@ namespace Biblia.App.Servicos
         public async Task<VersiculoViewModel> CaixinhaDePromessasAsync()
         {
             // 66 livros .:. Antigo Testamento = 39; Novo Testamento = 27
-
-            var versao = new Random(DateTime.Now.Millisecond).Next(0, 5);
             var livro = new Random(DateTime.Now.Millisecond).Next(1, 66);
 
             var capitulosDoLivro = await _versiculoRepository.ObterQuantidadeCapitulosDoLivroAsync(livro);
@@ -29,7 +27,7 @@ namespace Biblia.App.Servicos
             var versiculosNoCapitulo = await _versiculoRepository.ObterQuantidadeVersiculosNoCapituloDoLivroAsync(livro, capitulo);
             var numeroVersiculo = new Random(DateTime.Now.Millisecond).Next(1, versiculosNoCapitulo);
 
-            var versiculo = await _versiculoRepository.ObterVersiculoAsync(versao, livro, capitulo, numeroVersiculo);
+            var versiculo = await _versiculoRepository.ObterVersiculoAsync(5, livro, capitulo, numeroVersiculo);
 
             return Mapper.Map<VersiculoViewModel>(versiculo);
         }

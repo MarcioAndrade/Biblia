@@ -1,8 +1,10 @@
-﻿using Biblia.App.DTO;
+﻿using System;
+using Biblia.App.DTO;
 using Biblia.App.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Biblia.Repositorio.Excecoes;
 
 namespace Biblia.Controllers
 {
@@ -31,7 +33,20 @@ namespace Biblia.Controllers
         [HttpGet("CaixinhaPromessas")]
         public async Task<ActionResult<VersiculoViewModel>> CaixinhaPromessasAsync()
         {
-            return await _bibliaApp.CaixinhaDePromessasAsync();
+            try
+            {
+                return await _bibliaApp.CaixinhaDePromessasAsync();
+            }
+            catch (BibliaException ex)
+            {
+                // Logar Excecao
+
+                return new StatusCodeResult(500);
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(500);
+            }
         }
 
         /// <summary>
@@ -41,7 +56,20 @@ namespace Biblia.Controllers
         [HttpGet("livros")]
         public async Task<IEnumerable<LivroViewModel>> ObterLivrosAsync([FromQuery] int? testamentoId)
         {
-            return await _bibliaApp.LivrosAsync(testamentoId);
+            try
+            {
+                return await _bibliaApp.LivrosAsync(testamentoId);
+            }
+            catch (BibliaException ex)
+            {
+                // Logar Excecao
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -51,7 +79,20 @@ namespace Biblia.Controllers
         [HttpGet("versoes")]
         public async Task<IEnumerable<VersaoViewModel>> VersoesAsync()
         {
-            return await _bibliaApp.VersoesAsync();
+            try
+            {
+                return await _bibliaApp.VersoesAsync();
+            }
+            catch (BibliaException ex)
+            {
+                // Logar Excecao
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -65,7 +106,20 @@ namespace Biblia.Controllers
         [HttpGet("versao/{versaoId}/livro/{livroId}/capitulo/{capitulo}/numero/{numero}")]
         public async Task<VersiculoViewModel> VersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
-            return await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
+            try
+            {
+                return await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
+            }
+            catch (BibliaException ex)
+            {
+                // Logar Excecao
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -77,7 +131,20 @@ namespace Biblia.Controllers
         [HttpGet("Resumo/{versaoId}")]
         public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId, [FromQuery] int? testamentoId, [FromQuery] int? livroId)
         {
-            return await _bibliaApp.ObterResumoLivrosAsync(versaoId, testamentoId, livroId);
+            try
+            {
+                return await _bibliaApp.ObterResumoLivrosAsync(versaoId, testamentoId, livroId);
+            }
+            catch (BibliaException ex)
+            {
+                // Logar Excecao
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -90,7 +157,20 @@ namespace Biblia.Controllers
         [HttpGet("Versao/{versaoId}/Livro{livroId}/Capitulo/{capitulo}/quantidade-versiculos")]
         public async Task<int> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
         {
-            return await _bibliaApp.ObterQuantidadeVersiculosNoCapituloAsync(versaoId, livroId, capitulo);
+            try
+            {
+                return await _bibliaApp.ObterQuantidadeVersiculosNoCapituloAsync(versaoId, livroId, capitulo);
+            }
+            catch (BibliaException ex)
+            {
+                // Logar Excecao
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Biblia.Domain.Entidades;
 using System.Collections.Generic;
+using Biblia.Repositorio.Excecoes;
 using Microsoft.Extensions.Configuration;
 
 namespace Biblia.Repositorio
@@ -30,7 +31,7 @@ namespace Biblia.Repositorio
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new ObterQuantidadeCapitulosDoLivroException(ex.Message);
                 }
             }
         }
@@ -53,7 +54,7 @@ namespace Biblia.Repositorio
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new ObterQuantidadeVersiculosNoCapituloDoLivroException(ex.Message);
                 }
             }
         }
@@ -82,7 +83,7 @@ namespace Biblia.Repositorio
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new ListarLivrosException(ex.Message);
                 }
             }
         }
@@ -136,7 +137,7 @@ namespace Biblia.Repositorio
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new ListarResumosLivrosException(ex.Message);
                 }
             }
         }
@@ -161,7 +162,7 @@ namespace Biblia.Repositorio
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new ListarVersoesException(ex.Message);
                 }
             }
         }
@@ -202,7 +203,7 @@ namespace Biblia.Repositorio
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new ObterVersiculoException(ex.Message);
                 }
             }
         }
@@ -229,7 +230,7 @@ namespace Biblia.Repositorio
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw new ObterQuantidadeVersiculosNoCapituloException(ex.Message);
                 }
             }
         }

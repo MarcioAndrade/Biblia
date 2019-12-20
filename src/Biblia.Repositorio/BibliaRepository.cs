@@ -208,7 +208,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<int> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
+        public async Task<dynamic> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
         {
             using (Conexao)
             {
@@ -216,16 +216,21 @@ namespace Biblia.Repositorio
                 {
                     const string query = @"
                                                 SELECT     
-                                                    COUNT(v.Id) AS versiculos
+                                                    COUNT(v.Id) AS Versiculos, 
+                                                    v.versaoId AS Versao, 
+                                                    v.livroId AS Livro, 
+                                                    v.capitulo AS Capitulo
                                                 FROM 
                                                     Versiculos v
                                                 WHERE 
                                                     v.versaoId = @vid
                                                     AND v.livroId = @lid
                                                     AND v.capitulo = @c
+                                                GROUP BY
+                                                    v.versaoId, v.livroId, v.capitulo
                                             ";
 
-                    return await Conexao.QueryFirstOrDefaultAsync<int>(query, new { vid = versaoId, lid = livroId, c = capitulo });
+                    return await Conexao.QueryFirstOrDefaultAsync<dynamic>(query, new { vid = versaoId, lid = livroId, c = capitulo });
 
                 }
                 catch (Exception ex)

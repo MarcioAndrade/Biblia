@@ -11,7 +11,7 @@ namespace Biblia.Controllers
     /// <summary>
     /// API fornece recursos de consulta a livros, versículos e dados estatísticos em seis versões diferentes em português
     /// </summary>
-    [Route("v1/[controller]")]
+    [Route("v1")]
     [ApiController]
     public class BibliaController : ControllerBase
     {
@@ -128,7 +128,7 @@ namespace Biblia.Controllers
         /// Pode ser filtrado por livro através da propriedade livroId, passando o id do livro que se deseja o resumo
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
-        [HttpGet("Resumo/{versaoId}")]
+        [HttpGet("Resumo/versao/{versaoId}")]
         public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId, [FromQuery] int? testamentoId, [FromQuery] int? livroId)
         {
             try
@@ -154,8 +154,8 @@ namespace Biblia.Controllers
         /// <param name="livroId">Número identificador do livro. Pode ser obtido pelo recurso api/livros</param>
         /// <param name="capitulo">Capítulo do livro que deseja consultar</param>
         /// <returns>Quantidade de versículos em capítulo</returns>
-        [HttpGet("Versao/{versaoId}/Livro{livroId}/Capitulo/{capitulo}/quantidade-versiculos")]
-        public async Task<int> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
+        [HttpGet("Versao/{versaoId}/Livro/{livroId}/Capitulo/{capitulo}/quantidade-versiculos")]
+        public async Task<QuantidadeVersiculosCapitulo> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace Biblia.Controllers
             {
                 // Logar Excecao
 
-                return 0;
+                return null;
             }
             catch (Exception)
             {

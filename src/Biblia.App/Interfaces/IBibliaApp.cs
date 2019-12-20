@@ -11,6 +11,6 @@ namespace Biblia.App.Interfaces
         Task<IEnumerable<VersaoViewModel>> VersoesAsync();
         Task<VersiculoViewModel> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero);
         Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId, int? testamentoId, int? livroId);
-        Task<int> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo);
+        Task<QuantidadeVersiculosCapitulo> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo);
     }
 }

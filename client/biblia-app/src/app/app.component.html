@@ -1,3 +1,44 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1>Caixinha de promessas</h1>
+    </div>
+
+     <div class="panel-body">
+        <div class="col-lg-12">
+          <div class="col-lg-3 form-group">
+            <div class="col-lg-12 form-group">
+              <input id="Cep" type="text" size="9" maxlength="9" class="form-control"/>
+            </div>
+
+            <div class="col-lg-12 form-group">
+              <input id="btnVersiculo" value="Buscar versiculo" class="btn btn-primary form-control" type="submit" (click)='ObterVersiculo()' />   
+            </div>
+                              
+          </div>
+
+          <div class="col-lg-5">
+              <div class="col-lg-6">    
+                      <p><strong>{{versiculo.id}}</strong></p>
+              </div>
+          </div>
+
+          <div class="col-lg-4 text-center">
+              <div *ngIf="frete">
+                  <strong> # {{versiculo.texto}} # </strong>
+              </div>
+              <div *ngIf="!frete">
+                  <strong> ## {{versiculo.texto}} ##</strong>
+              </div>
+          </div>
+      </div>
+     </div>
+
+     <div class="panel-footer">
+        <p>
+          Os que confiam no Senhor, são como montes de Sião, que não se abalam, mas permanecem para sempre!
+        </p>
+     </div>
+
+  </div>
+</div>

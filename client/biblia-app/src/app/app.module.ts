@@ -6,6 +6,7 @@ import { Http, Response } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { CaixinhaPromessaComponent } from './caixinhaPromessa/caixinha-promessa/caixinha-promessa.component';
+import { CaixinhaPromessaServiceService } from './service/caixinha-promessa-service.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { CaixinhaPromessaComponent } from './caixinhaPromessa/caixinha-promessa/
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [CaixinhaPromessaServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

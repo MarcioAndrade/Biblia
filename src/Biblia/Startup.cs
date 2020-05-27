@@ -24,10 +24,10 @@ namespace Biblia
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             services.AddTransient<BibliaRepository>();
             services.AddScoped<IBibliaApp, BibliaApp>();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSwaggerGen(c =>
             {
@@ -63,6 +63,13 @@ namespace Biblia
             {
                 app.UseHsts();
             }
+
+            app.UseCors(c =>
+            {
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+            });
 
             app.UseHttpsRedirection();
             app.UseMvc();

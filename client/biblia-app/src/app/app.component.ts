@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CaixinhaPromessaServiceService } from './service/caixinha-promessa-service.service';
-import { Versiculo } from './service/versiculo';
+
+import { BibliaService } from './servicos/biblia.service';
+import { Versiculo } from './servicos/versiculo';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,11 @@ import { Versiculo } from './service/versiculo';
 export class AppComponent {
 
   versiculo: Versiculo;
+  versiculoRodape: Versiculo;
 
-  title = 'app works!';
+  title = 'biblia-app';
 
-  constructor(private _service: CaixinhaPromessaServiceService) {
+  constructor(private _service: BibliaService) {
 
   }
 

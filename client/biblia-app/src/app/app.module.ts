@@ -1,24 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { Http, Response } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { CaixinhaPromessaComponent } from './caixinhaPromessa/caixinha-promessa/caixinha-promessa.component';
-import { CaixinhaPromessaServiceService } from './service/caixinha-promessa-service.service';
+import { BibliaService } from './servicos/biblia.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CaixinhaPromessaComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    HttpClientModule
   ],
-  providers: [CaixinhaPromessaServiceService],
+  providers: [BibliaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

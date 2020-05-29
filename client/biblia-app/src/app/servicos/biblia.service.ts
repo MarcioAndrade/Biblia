@@ -9,9 +9,9 @@ import { CaixaPromessa } from './caixa-promessa';
 })
 export class BibliaService {
 
-  url = 'https://localhost:44340/v1/'; //debug
+  //url = 'https://localhost:44340/v1/'; //debug
   // url = 'http://localhost/v1/'; // IIS local
-  // url = 'http://mminfotech.com.br/biblia/v1/';
+  url = 'http://mminfotech.com.br/biblia/v1/';
 
   constructor(private http: HttpClient) { }
 

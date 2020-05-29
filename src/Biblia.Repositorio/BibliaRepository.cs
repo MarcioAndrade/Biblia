@@ -239,5 +239,120 @@ namespace Biblia.Repositorio
                 }
             }
         }
+
+        public async Task<int> ObterQuantidadeCaixaPromessasAsync()
+        {
+            using (Conexao)
+            {
+                try
+                {
+                    const string query = @"
+                                                SELECT     
+                                                    MAX(id)
+                                                FROM 
+                                                    CaixaPromessas c
+                                            ";
+
+                    return await Conexao.QueryFirstOrDefaultAsync<int>(query);
+
+                }
+                catch (Exception ex)
+                {
+                    throw new ObterQuantidadeCaixaPromessasException(ex.Message);
+                }
+            }
+        }
+
+        public async Task<IEnumerable<CaixaPromessas>> ObterVersiculosDaCaixaPromessasAsync(int caixaPromessaId)
+        {
+            using (Conexao)
+            {
+                try
+                {
+                    const string query = @"
+                                                SELECT
+                                                    id, 
+                                                    livroId, 
+                                                    capituloId, 
+                                                    numeroVersiculo
+                                                FROM 
+                                                    CaixaPromessas v
+                                                WHERE 
+                                                    v.id = @caixaPromessaId
+                                          ";
+
+                    return await Conexao.QueryAsync<CaixaPromessas>(query, new { caixaPromessaId });
+
+                }
+                catch (Exception ex)
+                {
+                    throw new ObterVersiculosDaCaixaPromessasException(ex.Message);
+                }
+            }
+        }
+
+        public async Task<IEnumerable<Versiculo>> ObterVersiculosAsync(int versao, int livro, int capitulo, IEnumerable<int> numeros)
+        {
+            using (Conexao)
+            {
+                try
+                {
+                    const string query = @"
+                                SELECT 
+                                    id, versaoId, capitulo, numero, texto 
+                                FROM 
+                                    Versiculos 
+                                WHERE 
+                                    versaoId = @vid 
+                                    AND livroId = @lid 
+                                    AND capitulo = @cid 
+                                    AND numero IN @nid;
+                                
+                                SELECT 
+                                    id, nome, testamentoId, posicao 
+                                FROM 
+                                    Livros 
+                                WHERE 
+                                    id = @lid;
+                                          ";
+
+                    return await Conexao.QueryAsync<Versiculo>(query, new { vid = versao, lid = livro, cid = capitulo, nid = numeros });
+
+                }
+                catch (Exception ex)
+                {
+                    throw new ObterVersiculosException(ex.Message);
+                }
+            }
+        }
+
+        public async Task<Livro> ObterLivroAsync(int livroId)
+        {
+            using (Conexao)
+            {
+                try
+                {
+                    const string query = @"
+                                                SELECT 
+	                                                id, 
+                                                    testamentoId,
+                                                    posicao,
+                                                    nome
+                                                FROM 
+	                                                Livros
+                                                WHERE 
+	                                                id =  @lid;
+                                          ";
+
+                    return await Conexao.QueryFirstOrDefaultAsync<Livro>(query, new { lid = livroId });
+
+                }
+                catch (Exception ex)
+                {
+                    throw new ObterLivroException(ex.Message);
+                }
+
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { BibliaService } from './servicos/biblia.service';
-import { Versiculo } from './servicos/versiculo';
+import { CaixaPromessa } from './servicos/caixa-promessa';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +11,8 @@ import { Versiculo } from './servicos/versiculo';
 })
 export class AppComponent {
 
-  versiculo: Versiculo;
-  versiculoRodape: Versiculo;
+  caixaPromessa: CaixaPromessa;
+  caixaPromessaRodape: CaixaPromessa;
 
   title = 'biblia-app';
 
@@ -20,9 +20,9 @@ export class AppComponent {
 
   }
 
-  ObterVersiculo(): void {
+  ObterCaixinhaPromessa(): void {
     this._service.getCaixinhaPromessa()
-      .subscribe((data: Versiculo) => this.versiculo = data,
+      .subscribe((data: CaixaPromessa) => this.caixaPromessa = data,
         error => console.log(error));
   }
 }

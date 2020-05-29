@@ -4,6 +4,7 @@ using Biblia.Repositorio;
 using Biblia.App.Interfaces;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Biblia.App.Servicos
 {
@@ -16,20 +17,27 @@ namespace Biblia.App.Servicos
             _versiculoRepository = versiculoRepository;
         }
 
-        public async Task<VersiculoViewModel> CaixinhaDePromessasAsync()
+        public async Task<CaixaPromessaViewModel> CaixinhaDePromessasAsync()
         {
-            // 66 livros .:. Antigo Testamento = 39; Novo Testamento = 27
-            var livro = new Random(DateTime.Now.Millisecond).Next(1, 66);
+            var qtdCaixaPromessa = await _versiculoRepository.ObterQuantidadeCaixaPromessasAsync();
+            var caixaPromessaId = new Random(DateTime.Now.Millisecond).Next(1, qtdCaixaPromessa);
 
-            var capitulosDoLivro = await _versiculoRepository.ObterQuantidadeCapitulosDoLivroAsync(livro);
-            var capitulo = new Random(DateTime.Now.Millisecond).Next(1, capitulosDoLivro);
+            var versiculosCaixaPromessas = await _versiculoRepository.ObterVersiculosDaCaixaPromessasAsync(caixaPromessaId); //45
 
-            var versiculosNoCapitulo = await _versiculoRepository.ObterQuantidadeVersiculosNoCapituloDoLivroAsync(livro, capitulo);
-            var numeroVersiculo = new Random(DateTime.Now.Millisecond).Next(1, versiculosNoCapitulo);
+            var livroId = versiculosCaixaPromessas.Max(x => x.LivroId);
+            var capituloId = versiculosCaixaPromessas.Max(x => x.CapituloId);
+            var numerosVersiculos = versiculosCaixaPromessas.Select(x => x.NumeroVersiculo);
 
-            var versiculo = await _versiculoRepository.ObterVersiculoAsync(5, livro, capitulo, numeroVersiculo);
+            var livro = await _versiculoRepository.ObterLivroAsync(livroId);
+            var versiculos = await _versiculoRepository.ObterVersiculosAsync(5, livroId, capituloId, numerosVersiculos);
 
-            return Mapper.Map<VersiculoViewModel>(versiculo);
+            var referencia = $"{livro.Nome} {capituloId}:{versiculos.Min(x => x.Numero)}";
+            var texto = string.Join(" ", versiculos.Select(x => x.Texto));
+
+            if (versiculos.Count() > 1)
+                referencia += $"-{versiculos.Max(x => x.Numero)}";
+
+            return new CaixaPromessaViewModel { Id = caixaPromessaId, Referencia = referencia, Texto = texto };
         }
 
         public async Task<IEnumerable<LivroViewModel>> LivrosAsync(int? testamentoId)

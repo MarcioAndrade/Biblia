@@ -31,7 +31,7 @@ namespace Biblia.Controllers
         /// </summary>
         /// <returns>Versículo</returns>
         [HttpGet("CaixinhaPromessas")]
-        public async Task<ActionResult<VersiculoViewModel>> CaixinhaPromessasAsync()
+        public async Task<ActionResult<CaixaPromessaViewModel>> CaixinhaPromessasAsync()
         {
             try
             {
@@ -170,7 +170,7 @@ namespace Biblia.Controllers
             catch (Exception)
             {
                 throw;
-            }            
+            }
         }
     }
 }

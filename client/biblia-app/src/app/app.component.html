@@ -6,9 +6,9 @@
     <div class="panel-body">
       <div class="col-lg-12">
         <div class="col-lg-12 form-group">
-          <div class="col-lg-12 form-group">
-            <p>"{{caixaPromessa.texto}}"</p>
-            <p><strong>{{caixaPromessa.referencia}}</strong></p>
+          <div class="col-lg-12 form-group" *ngIf="caixaPromessa?.texto?.length > 0">
+            <p class="text-justify">"{{caixaPromessa?.texto}}"</p>
+            <p class="text-center"><strong>{{caixaPromessa?.referencia}}</strong></p>
           </div>
 
           <div class="col-lg-12 form-group">

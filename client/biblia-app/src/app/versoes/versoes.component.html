@@ -1,0 +1,22 @@
+<div class="col-xs-12" *ngIf="versoes.length === 0">
+  <p>
+    Não há versões a serem exibidas :(
+  </p>
+</div>
+
+<div class="col-xs-6 table-responsive" *ngIf="versoes.length > 0">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-left col-xs-1"></th>
+        <th class="text-left col-xs-9">Versão</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ver of versoes">
+        <td class="text-left">{{ver.id}}</td>
+        <td class="text-left">{{ver.nome}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

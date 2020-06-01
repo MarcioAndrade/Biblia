@@ -3,17 +3,17 @@
 	A API disponibliza seis versões em português das sagradas escrutiras 
 
 ## 1. Recursos
-###	1.1. Caixinha de promessas	
-###	1.2. Busca de versículos (em desenvolvimento)	
-###	1.3. Montagem de plano de estudo (em desenvolvimento)	
-###	1.4. Acompanhamento do estudo (em desenvolvimento)
+* Caixinha de promessas	
+* Busca de versículos (em desenvolvimento)	
+* Montagem de plano de estudo (em desenvolvimento)	
+* Acompanhamento do estudo (em desenvolvimento)
 	
 ## 2. Tecnologias	
-###	2.1. Plataforma .Net Core	
-###	2.2. Banco de dados relacional MySql	
-###	2.3. Dapper	
-###	2.4. Domain Driven Design - DDD	
-###	2.5. Angular
+* Plataforma .Net Core	
+* Banco de dados relacional MySql	
+* Dapper	
+* Domain Driven Design - DDD	
+* Angular
 	
 ## 3. Disponibilização dos recursos	
 ###	3.1. API: http://mminfotech.com.br/biblia/

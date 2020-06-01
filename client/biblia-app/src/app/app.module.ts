@@ -11,7 +11,6 @@ import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
 import { CaixaPromessasComponent } from './caixa-promessas/caixa-promessas.component';
 import { RouterModule } from '@angular/router';
-import { VersoesComponent } from './versoes/versoes.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import { VersoesComponent } from './versoes/versoes.component';
     HomeComponent,
     HeaderComponent,
     AboutComponent,
-    CaixaPromessasComponent,
-    VersoesComponent
+    CaixaPromessasComponent
   ],
   imports: [
     BrowserModule,

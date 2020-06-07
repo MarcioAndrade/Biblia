@@ -2,8 +2,8 @@
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="cointainer">
       <div class="navbar-header">
-        <a [routerLink]="['/']" class="navbar-brand"><b>BibliaApp</b></a>
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+        <a [routerLink]="['biblia-app/home']" class="navbar-brand"><b>BibliaApp</b></a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -11,15 +11,11 @@
         </button>
       </div>
 
-      <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+      <div id="navbarCollapse" class="collapse navbar-collapse pull-left">
         <ul class="nav navbar-nav">
-          <li routerLinkActive="active"><a [routerLink]="['/caixaPromessas']">Caixinha de promessas</a></li>
-          <li routerLinkActive="active"><a [routerLink]="['/about']">Sobre</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['biblia-app/caixaPromessas']">Promessas</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['biblia-app/about']">Sobre</a></li>
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-    </form> -->
       </div>
     </div>
   </nav>

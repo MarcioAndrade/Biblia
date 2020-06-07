@@ -5,7 +5,8 @@ import { CaixaPromessasComponent } from './caixa-promessas/caixa-promessas.compo
 import { AboutComponent } from './about/about.component';
 
 export const ROUTES: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'caixaPromessas', component: CaixaPromessasComponent }
+  { path: 'biblia-app/', component: HomeComponent },
+  { path: 'biblia-app/home', component: HomeComponent },
+  { path: 'biblia-app/about', component: AboutComponent },
+  { path: 'biblia-app/caixaPromessas', component: CaixaPromessasComponent }
 ];

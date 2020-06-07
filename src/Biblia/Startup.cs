@@ -77,6 +77,7 @@ namespace Biblia
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
+                //c.RoutePrefix = "swagger";
                 c.SwaggerEndpoint("../swagger/v1/swagger.json", "Bíblia API");
             });
         }

@@ -19,3 +19,6 @@ jobs:
                 
     - name: Build com o utilitario dotnet
       run: dotnet build ./src --configuration Release
+    
+    - name: Testes
+      run: dotnet test ./src

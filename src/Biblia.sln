@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblia.App", "Biblia.App\Bi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblia.Repositorio", "Biblia.Repositorio\Biblia.Repositorio.csproj", "{67E84916-F605-4C84-8468-FD9435F4E68B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblia.App.Testes", "..\testes\Biblia.App.Testes\Biblia.App.Testes.csproj", "{43952145-0316-4D7C-AF82-2EC32FF0CE15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblia.App.Testes", "..\testes\Biblia.App.Testes\Biblia.App.Testes.csproj", "{43952145-0316-4D7C-AF82-2EC32FF0CE15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

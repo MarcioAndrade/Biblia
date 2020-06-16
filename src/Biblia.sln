@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblia.Domain", "Biblia.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblia.App", "Biblia.App\Biblia.App.csproj", "{57966B1A-EDC2-4A63-8F97-063D5B84A7EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblia.Repositorio", "Biblia.Repositorio\Biblia.Repositorio.csproj", "{67E84916-F605-4C84-8468-FD9435F4E68B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblia.Repositorio", "Biblia.Repositorio\Biblia.Repositorio.csproj", "{67E84916-F605-4C84-8468-FD9435F4E68B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblia.App.Testes", "..\testes\Biblia.App.Testes\Biblia.App.Testes.csproj", "{43952145-0316-4D7C-AF82-2EC32FF0CE15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{67E84916-F605-4C84-8468-FD9435F4E68B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67E84916-F605-4C84-8468-FD9435F4E68B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67E84916-F605-4C84-8468-FD9435F4E68B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43952145-0316-4D7C-AF82-2EC32FF0CE15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43952145-0316-4D7C-AF82-2EC32FF0CE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43952145-0316-4D7C-AF82-2EC32FF0CE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43952145-0316-4D7C-AF82-2EC32FF0CE15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{00715C0D-F82F-48A9-A814-99ACD2E1E2EE} = {D0EE24B0-5472-4AB9-BFE0-0C8F5D8220D4}
 		{57966B1A-EDC2-4A63-8F97-063D5B84A7EA} = {C94E8008-255C-4828-8821-DBAE2EB8C080}
 		{67E84916-F605-4C84-8468-FD9435F4E68B} = {92272E0A-900B-4CBA-8F19-58711BFB1CD9}
+		{43952145-0316-4D7C-AF82-2EC32FF0CE15} = {C94E8008-255C-4828-8821-DBAE2EB8C080}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECE587B2-D1EE-458E-B36F-8391812CB1B4}

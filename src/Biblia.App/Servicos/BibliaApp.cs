@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Linq;
 using Biblia.App.DTO;
 using Biblia.Repositorio;
 using Biblia.App.Interfaces;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Biblia.App.Servicos
 {
     public class BibliaApp : ServiceBase, IBibliaApp
     {
-        private BibliaRepository _versiculoRepository { get; }
+        private IBibliaRepository _versiculoRepository { get; }
 
-        public BibliaApp(BibliaRepository versiculoRepository)
+        public BibliaApp(IBibliaRepository versiculoRepository)
         {
             _versiculoRepository = versiculoRepository;
         }

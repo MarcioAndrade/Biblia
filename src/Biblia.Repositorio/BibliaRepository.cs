@@ -88,7 +88,7 @@ namespace Biblia.Repositorio
             }
         }
 
-        public async Task<IEnumerable<dynamic>> ListarResumosLivrosAsync(int versaoId, int? testamentoId, int? livroId)
+        public async Task<IEnumerable<Resumo>> ListarResumosLivrosAsync(int versaoId, int? testamentoId, int? livroId)
         {
             using (Conexao)
             {
@@ -133,7 +133,7 @@ namespace Biblia.Repositorio
                                             l.posicao
                                 ";
 
-                    return await Conexao.QueryAsync(query, new { vid = versaoId });
+                    return await Conexao.QueryAsync<Resumo>(query, new { vid = versaoId });
                 }
                 catch (Exception ex)
                 {

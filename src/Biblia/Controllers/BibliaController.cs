@@ -37,7 +37,7 @@ namespace Biblia.Controllers
             {
                 return await _bibliaApp.CaixinhaDePromessasAsync();
             }
-            catch (BibliaException ex)
+            catch (BibliaException)
             {
                 // Logar Excecao
 
@@ -60,7 +60,7 @@ namespace Biblia.Controllers
             {
                 return await _bibliaApp.LivrosAsync(testamentoId);
             }
-            catch (BibliaException ex)
+            catch (BibliaException)
             {
                 // Logar Excecao
 
@@ -83,7 +83,7 @@ namespace Biblia.Controllers
             {
                 return await _bibliaApp.VersoesAsync();
             }
-            catch (BibliaException ex)
+            catch (BibliaException)
             {
                 // Logar Excecao
 
@@ -110,7 +110,7 @@ namespace Biblia.Controllers
             {
                 return await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
             }
-            catch (BibliaException ex)
+            catch (BibliaException)
             {
                 // Logar Excecao
 
@@ -135,7 +135,7 @@ namespace Biblia.Controllers
             {
                 return await _bibliaApp.ObterResumoLivrosAsync(versaoId, testamentoId, livroId);
             }
-            catch (BibliaException ex)
+            catch (BibliaException)
             {
                 // Logar Excecao
 
@@ -161,7 +161,7 @@ namespace Biblia.Controllers
             {
                 return await _bibliaApp.ObterQuantidadeVersiculosNoCapituloAsync(versaoId, livroId, capitulo);
             }
-            catch (BibliaException ex)
+            catch (BibliaException)
             {
                 // Logar Excecao
 

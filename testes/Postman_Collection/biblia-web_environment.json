@@ -1,0 +1,14 @@
+{
+	"id": "ec2c5f65-9f59-47d9-94dd-0c38ae6d0410",
+	"name": "biblia-web",
+	"values": [
+		{
+			"key": "biblia-host",
+			"value": "http://mminfotech.com.br/biblia",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-08-26T02:25:15.948Z",
+	"_postman_exported_using": "Postman/7.31.0"
+}

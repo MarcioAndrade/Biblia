@@ -1,0 +1,823 @@
+{
+	"info": {
+		"_postman_id": "f76a45ff-0b94-4c90-ac70-9567aca57737",
+		"name": "Biblia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Caixa de promessas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e6c39b6c-8763-40c5-ab5d-357783b77625",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Deve retornar id válido', function(){",
+							"   pm.expect(data.id).to.be.a('number');",
+							"});",
+							"",
+							"pm.test('Deve retornar texto', function(){",
+							"   pm.expect(data.texto).to.be.a('string');",
+							"});",
+							"",
+							"pm.test('Deve retornar referência', function(){",
+							"   pm.expect(data.texto).to.be.a('string');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{biblia-host}}/v1/CaixinhaPromessas",
+					"host": [
+						"{{biblia-host}}"
+					],
+					"path": [
+						"v1",
+						"CaixinhaPromessas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Caixa de promessas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/v1/Biblia/CaixinhaPromessas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"v1",
+								"Biblia",
+								"CaixinhaPromessas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVx2MVxCaWJsaWFcQ2FpeGluaGFQcm9tZXNzYXM=?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 24 Nov 2019 12:59:21 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 83091,\n    \"versaoId\": 2,\n    \"livro\": {\n        \"id\": 28,\n        \"nome\": \"Oséias\",\n        \"testamentoId\": 1,\n        \"posicao\": 28\n    },\n    \"capitulo\": 6,\n    \"numero\": 4,\n    \"texto\": \"Que te farei, ó Efraim? Que te farei, ó Judá? Porque a vossa benignidade é como a nuvem da manhã e como o orvalho da madrugada, que cedo passa.\"\n}"
+				},
+				{
+					"name": "Caixa de promessas web",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{biblia-host}}/v1/CaixinhaPromessas",
+							"host": [
+								"{{biblia-host}}"
+							],
+							"path": [
+								"v1",
+								"CaixinhaPromessas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 21 May 2020 02:05:58 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 186287,\n    \"versaoId\": 5,\n    \"livro\": {\n        \"id\": 6,\n        \"nome\": \"Josué\",\n        \"testamentoId\": 1,\n        \"posicao\": 6\n    },\n    \"capitulo\": 11,\n    \"numero\": 8,\n    \"texto\": \"E o Senhor os entregou na mão dos israelitas, que os feriram e os perseguiram até a grande Sidom, e até Misrefote-Maim, e até o vale de Mizpe ao oriente; e feriram-nos até não lhes deixar nem sequer um.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Livros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0f3cf00-ab59-4644-8431-6158c4658edf",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Deve retornar 66 livros', function(){",
+							"   pm.expect(66).to.equal(data.length);",
+							"});",
+							"",
+							"pm.test('Deve retornar primeiro livro Gênesis', function(){",
+							"   pm.expect(1).to.equal(data[0].id);",
+							"   pm.expect(\"Gênesis\").to.equal(data[0].nome);",
+							"   pm.expect(1).to.equal(data[0].testamentoId);",
+							"   pm.expect(1).to.equal(data[0].posicao);",
+							"});",
+							"",
+							"pm.test('Deve retornar o último livro Apocalipse', function(){",
+							"   pm.expect(66).to.equal(data[65].id);",
+							"   pm.expect(\"Apocalipse\").to.equal(data[65].nome);",
+							"   pm.expect(2).to.equal(data[65].testamentoId);",
+							"   pm.expect(27).to.equal(data[65].posicao);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{biblia-host}}/v1/livros",
+					"host": [
+						"{{biblia-host}}"
+					],
+					"path": [
+						"v1",
+						"livros"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Livros",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/v1/Biblia/livros",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"v1",
+								"Biblia",
+								"livros"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVx2MVxCaWJsaWFcbGl2cm9z?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 24 Nov 2019 13:00:12 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"nome\": \"Gênesis\",\n        \"testamentoId\": 1,\n        \"posicao\": 1\n    },\n    {\n        \"id\": 2,\n        \"nome\": \"Êxodo\",\n        \"testamentoId\": 1,\n        \"posicao\": 2\n    },\n    {\n        \"id\": 3,\n        \"nome\": \"Levítico\",\n        \"testamentoId\": 1,\n        \"posicao\": 3\n    },\n    {\n        \"id\": 4,\n        \"nome\": \"Números\",\n        \"testamentoId\": 1,\n        \"posicao\": 4\n    },\n    {\n        \"id\": 5,\n        \"nome\": \"Deuteronômio\",\n        \"testamentoId\": 1,\n        \"posicao\": 5\n    },\n    {\n        \"id\": 6,\n        \"nome\": \"Josué\",\n        \"testamentoId\": 1,\n        \"posicao\": 6\n    },\n    {\n        \"id\": 7,\n        \"nome\": \"Juízes\",\n        \"testamentoId\": 1,\n        \"posicao\": 7\n    },\n    {\n        \"id\": 8,\n        \"nome\": \"Rute\",\n        \"testamentoId\": 1,\n        \"posicao\": 8\n    },\n    {\n        \"id\": 9,\n        \"nome\": \"I Samuel\",\n        \"testamentoId\": 1,\n        \"posicao\": 9\n    },\n    {\n        \"id\": 10,\n        \"nome\": \"II Samuel\",\n        \"testamentoId\": 1,\n        \"posicao\": 10\n    },\n    {\n        \"id\": 11,\n        \"nome\": \"I Reis\",\n        \"testamentoId\": 1,\n        \"posicao\": 11\n    },\n    {\n        \"id\": 12,\n        \"nome\": \"II Reis\",\n        \"testamentoId\": 1,\n        \"posicao\": 12\n    },\n    {\n        \"id\": 13,\n        \"nome\": \"I Crônicas\",\n        \"testamentoId\": 1,\n        \"posicao\": 13\n    },\n    {\n        \"id\": 14,\n        \"nome\": \"II Crônicas\",\n        \"testamentoId\": 1,\n        \"posicao\": 14\n    },\n    {\n        \"id\": 15,\n        \"nome\": \"Esdras\",\n        \"testamentoId\": 1,\n        \"posicao\": 15\n    },\n    {\n        \"id\": 16,\n        \"nome\": \"Neemias\",\n        \"testamentoId\": 1,\n        \"posicao\": 16\n    },\n    {\n        \"id\": 17,\n        \"nome\": \"Ester\",\n        \"testamentoId\": 1,\n        \"posicao\": 17\n    },\n    {\n        \"id\": 18,\n        \"nome\": \"Jó\",\n        \"testamentoId\": 1,\n        \"posicao\": 18\n    },\n    {\n        \"id\": 19,\n        \"nome\": \"Salmos\",\n        \"testamentoId\": 1,\n        \"posicao\": 19\n    },\n    {\n        \"id\": 20,\n        \"nome\": \"Provérbios\",\n        \"testamentoId\": 1,\n        \"posicao\": 20\n    },\n    {\n        \"id\": 21,\n        \"nome\": \"Eclesiastes\",\n        \"testamentoId\": 1,\n        \"posicao\": 21\n    },\n    {\n        \"id\": 22,\n        \"nome\": \"Cântico dos Cânticos\",\n        \"testamentoId\": 1,\n        \"posicao\": 22\n    },\n    {\n        \"id\": 23,\n        \"nome\": \"Isaías\",\n        \"testamentoId\": 1,\n        \"posicao\": 23\n    },\n    {\n        \"id\": 24,\n        \"nome\": \"Jeremias\",\n        \"testamentoId\": 1,\n        \"posicao\": 24\n    },\n    {\n        \"id\": 25,\n        \"nome\": \"Lamentações Jeremias\",\n        \"testamentoId\": 1,\n        \"posicao\": 25\n    },\n    {\n        \"id\": 26,\n        \"nome\": \"Ezequiel\",\n        \"testamentoId\": 1,\n        \"posicao\": 26\n    },\n    {\n        \"id\": 27,\n        \"nome\": \"Daniel\",\n        \"testamentoId\": 1,\n        \"posicao\": 27\n    },\n    {\n        \"id\": 28,\n        \"nome\": \"Oséias\",\n        \"testamentoId\": 1,\n        \"posicao\": 28\n    },\n    {\n        \"id\": 29,\n        \"nome\": \"Joel\",\n        \"testamentoId\": 1,\n        \"posicao\": 29\n    },\n    {\n        \"id\": 30,\n        \"nome\": \"Amós\",\n        \"testamentoId\": 1,\n        \"posicao\": 30\n    },\n    {\n        \"id\": 31,\n        \"nome\": \"Obadias\",\n        \"testamentoId\": 1,\n        \"posicao\": 31\n    },\n    {\n        \"id\": 32,\n        \"nome\": \"Jonas\",\n        \"testamentoId\": 1,\n        \"posicao\": 32\n    },\n    {\n        \"id\": 33,\n        \"nome\": \"Miquéias\",\n        \"testamentoId\": 1,\n        \"posicao\": 33\n    },\n    {\n        \"id\": 34,\n        \"nome\": \"Naum\",\n        \"testamentoId\": 1,\n        \"posicao\": 34\n    },\n    {\n        \"id\": 35,\n        \"nome\": \"Habacuque\",\n        \"testamentoId\": 1,\n        \"posicao\": 35\n    },\n    {\n        \"id\": 36,\n        \"nome\": \"Sofonias\",\n        \"testamentoId\": 1,\n        \"posicao\": 36\n    },\n    {\n        \"id\": 37,\n        \"nome\": \"Ageu\",\n        \"testamentoId\": 1,\n        \"posicao\": 37\n    },\n    {\n        \"id\": 38,\n        \"nome\": \"Zacarias\",\n        \"testamentoId\": 1,\n        \"posicao\": 38\n    },\n    {\n        \"id\": 39,\n        \"nome\": \"Malaquias\",\n        \"testamentoId\": 1,\n        \"posicao\": 39\n    },\n    {\n        \"id\": 40,\n        \"nome\": \"Mateus\",\n        \"testamentoId\": 2,\n        \"posicao\": 1\n    },\n    {\n        \"id\": 41,\n        \"nome\": \"Marcos\",\n        \"testamentoId\": 2,\n        \"posicao\": 2\n    },\n    {\n        \"id\": 42,\n        \"nome\": \"Lucas\",\n        \"testamentoId\": 2,\n        \"posicao\": 3\n    },\n    {\n        \"id\": 43,\n        \"nome\": \"João\",\n        \"testamentoId\": 2,\n        \"posicao\": 4\n    },\n    {\n        \"id\": 44,\n        \"nome\": \"Atos\",\n        \"testamentoId\": 2,\n        \"posicao\": 5\n    },\n    {\n        \"id\": 45,\n        \"nome\": \"Romanos\",\n        \"testamentoId\": 2,\n        \"posicao\": 6\n    },\n    {\n        \"id\": 46,\n        \"nome\": \"I Coríntios\",\n        \"testamentoId\": 2,\n        \"posicao\": 7\n    },\n    {\n        \"id\": 47,\n        \"nome\": \"II Coríntios\",\n        \"testamentoId\": 2,\n        \"posicao\": 8\n    },\n    {\n        \"id\": 48,\n        \"nome\": \"Gálatas\",\n        \"testamentoId\": 2,\n        \"posicao\": 9\n    },\n    {\n        \"id\": 49,\n        \"nome\": \"Efésios\",\n        \"testamentoId\": 2,\n        \"posicao\": 10\n    },\n    {\n        \"id\": 50,\n        \"nome\": \"Filipenses\",\n        \"testamentoId\": 2,\n        \"posicao\": 11\n    },\n    {\n        \"id\": 51,\n        \"nome\": \"Colossenses\",\n        \"testamentoId\": 2,\n        \"posicao\": 12\n    },\n    {\n        \"id\": 52,\n        \"nome\": \"I Tessalonicenses\",\n        \"testamentoId\": 2,\n        \"posicao\": 13\n    },\n    {\n        \"id\": 53,\n        \"nome\": \"II Tessalonicenses\",\n        \"testamentoId\": 2,\n        \"posicao\": 14\n    },\n    {\n        \"id\": 54,\n        \"nome\": \"I Timóteo\",\n        \"testamentoId\": 2,\n        \"posicao\": 15\n    },\n    {\n        \"id\": 55,\n        \"nome\": \"II Timóteo\",\n        \"testamentoId\": 2,\n        \"posicao\": 16\n    },\n    {\n        \"id\": 56,\n        \"nome\": \"Tito\",\n        \"testamentoId\": 2,\n        \"posicao\": 17\n    },\n    {\n        \"id\": 57,\n        \"nome\": \"Filemom\",\n        \"testamentoId\": 2,\n        \"posicao\": 18\n    },\n    {\n        \"id\": 58,\n        \"nome\": \"Hebreus\",\n        \"testamentoId\": 2,\n        \"posicao\": 19\n    },\n    {\n        \"id\": 59,\n        \"nome\": \"Tiago\",\n        \"testamentoId\": 2,\n        \"posicao\": 20\n    },\n    {\n        \"id\": 60,\n        \"nome\": \"I Pedro\",\n        \"testamentoId\": 2,\n        \"posicao\": 21\n    },\n    {\n        \"id\": 61,\n        \"nome\": \"II Pedro\",\n        \"testamentoId\": 2,\n        \"posicao\": 22\n    },\n    {\n        \"id\": 62,\n        \"nome\": \"I João\",\n        \"testamentoId\": 2,\n        \"posicao\": 23\n    },\n    {\n        \"id\": 63,\n        \"nome\": \"II João\",\n        \"testamentoId\": 2,\n        \"posicao\": 24\n    },\n    {\n        \"id\": 64,\n        \"nome\": \"III João\",\n        \"testamentoId\": 2,\n        \"posicao\": 25\n    },\n    {\n        \"id\": 65,\n        \"nome\": \"Judas\",\n        \"testamentoId\": 2,\n        \"posicao\": 26\n    },\n    {\n        \"id\": 66,\n        \"nome\": \"Apocalipse\",\n        \"testamentoId\": 2,\n        \"posicao\": 27\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Versoes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54ddd8ad-ab5e-40ad-81f3-b31e8d0db987",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Deve retornar 6 versões', function(){",
+							"   pm.expect(6).to.equal(data.length);",
+							"});",
+							"",
+							"pm.test('Primeira versão Almeida Revisada Imprensa Bíblica', function(){",
+							"   pm.expect(1).to.equal(data[0].id);",
+							"   pm.expect(\"Almeida Revisada Imprensa Bíblica\").to.equal(data[0].nome);",
+							"});",
+							"",
+							"pm.test('Segunda versão Almeida Corrigida e Revisada Fiel', function(){",
+							"   pm.expect(2).to.equal(data[1].id);",
+							"   pm.expect(\"Almeida Corrigida e Revisada Fiel\").to.equal(data[1].nome);",
+							"});",
+							"",
+							"pm.test('Terceira versão Nova Versão Internacional', function(){",
+							"   pm.expect(3).to.equal(data[2].id);",
+							"   pm.expect(\"Nova Versão Internacional\").to.equal(data[2].nome);",
+							"});",
+							"",
+							"pm.test('Quarta versão Sociedade Bíblica Britânica', function(){",
+							"   pm.expect(4).to.equal(data[3].id);",
+							"   pm.expect(\"Sociedade Bíblica Britânica\").to.equal(data[3].nome);",
+							"});",
+							"",
+							"pm.test('Quinta versão Almeida Revista e Atualizada', function(){",
+							"   pm.expect(5).to.equal(data[4].id);",
+							"   pm.expect(\"Almeida Revista e Atualizada\").to.equal(data[4].nome);",
+							"});",
+							"",
+							"pm.test('Sexta versão Não Identificada', function(){",
+							"   pm.expect(6).to.equal(data[5].id);",
+							"   pm.expect(\"Não Identificada\").to.equal(data[5].nome);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{biblia-host}}/v1/versoes",
+					"host": [
+						"{{biblia-host}}"
+					],
+					"path": [
+						"v1",
+						"versoes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Versoes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/v1/Biblia/versoes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"v1",
+								"Biblia",
+								"versoes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVx2MVxCaWJsaWFcdmVyc29lcw==?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 24 Nov 2019 13:00:50 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"nome\": \"Almeida Revisada Imprensa Bíblica\"\n    },\n    {\n        \"id\": 2,\n        \"nome\": \"Almeida Corrigida e Revisada Fiel\"\n    },\n    {\n        \"id\": 3,\n        \"nome\": \"Nova Versão Internacional\"\n    },\n    {\n        \"id\": 4,\n        \"nome\": \"Sociedade Bíblica Britânica\"\n    },\n    {\n        \"id\": 5,\n        \"nome\": \"Almeida Revista e Atualizada\"\n    },\n    {\n        \"id\": 6,\n        \"nome\": \"Não Identificada\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Versiculo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "38a5efab-b49f-486c-9b88-8e0519fb318d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Deve retornar id 149586', function(){",
+							"   pm.expect(149586).to.equal(data.id);",
+							"});",
+							"",
+							"pm.test('Deve retornar versaoId 4', function(){",
+							"   pm.expect(4).to.equal(data.versaoId);",
+							"});",
+							"",
+							"pm.test('Deve retornar Livro Tiago', function(){",
+							"   pm.expect(59).to.equal(data.livro.id);",
+							"   pm.expect(\"Tiago\").to.equal(data.livro.nome);",
+							"   pm.expect(2).to.equal(data.livro.testamentoId);",
+							"   pm.expect(20).to.equal(data.livro.posicao);",
+							"});",
+							"",
+							"pm.test('Deve retornar capitulo 3', function(){",
+							"   pm.expect(3).to.equal(data.capitulo);",
+							"});",
+							"",
+							"pm.test('Deve retornar número 3', function(){",
+							"   pm.expect(3).to.equal(data.numero);",
+							"});",
+							"",
+							"pm.test('Deve retornar texto', function(){",
+							"   pm.expect(\"Ora se pomos freios nas bocas dos cavalos para que nos obedeçam, também governamos todo o seu corpo.\").to.equal(data.texto);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{biblia-host}}/v1/versao/4/livro/59/capitulo/3/numero/3",
+					"host": [
+						"{{biblia-host}}"
+					],
+					"path": [
+						"v1",
+						"versao",
+						"4",
+						"livro",
+						"59",
+						"capitulo",
+						"3",
+						"numero",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Versiculo",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/v1/Biblia/versao/4/livro/59/capitulo/3/numero/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"v1",
+								"Biblia",
+								"versao",
+								"4",
+								"livro",
+								"59",
+								"capitulo",
+								"3",
+								"numero",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVx2MVxCaWJsaWFcdmVyc2FvXDRcbGl2cm9cNTlcY2FwaXR1bG9cM1xudW1lcm9cMw==?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 24 Nov 2019 13:01:24 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 149586,\n    \"versaoId\": 4,\n    \"livro\": {\n        \"id\": 59,\n        \"nome\": \"Tiago\",\n        \"testamentoId\": 2,\n        \"posicao\": 20\n    },\n    \"capitulo\": 3,\n    \"numero\": 3,\n    \"texto\": \"Ora se pomos freios nas bocas dos cavalos para que nos obedeçam, também governamos todo o seu corpo.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Resumo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e4450c83-9ced-4ae9-ad43-c524d432c82e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Deve retornar 66 livros', function(){",
+							"   pm.expect(66).to.equal(data.length);",
+							"});",
+							"",
+							"pm.test('Resumo do primeiro livro', function(){",
+							"   pm.expect(1).to.equal(data[0].testamentoId);",
+							"   pm.expect(\"Antigo Testamento\").to.equal(data[0].testamento);",
+							"   pm.expect(1).to.equal(data[0].livroId);",
+							"   pm.expect(\"Gênesis\").to.equal(data[0].livro);",
+							"   pm.expect(1).to.equal(data[0].posicao);",
+							"   pm.expect(50).to.equal(data[0].capitulos);",
+							"   pm.expect(1531).to.equal(data[0].versiculos);",
+							"});",
+							"",
+							"pm.test('Resumo do último livro', function(){",
+							"   pm.expect(2).to.equal(data[65].testamentoId);",
+							"   pm.expect(\"Novo Testamento\").to.equal(data[65].testamento);",
+							"   pm.expect(66).to.equal(data[65].livroId);",
+							"   pm.expect(\"Apocalipse\").to.equal(data[65].livro);",
+							"   pm.expect(27).to.equal(data[65].posicao);",
+							"   pm.expect(22).to.equal(data[65].capitulos);",
+							"   pm.expect(405).to.equal(data[65].versiculos);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{biblia-host}}/v1/Resumo/versao/5",
+					"host": [
+						"{{biblia-host}}"
+					],
+					"path": [
+						"v1",
+						"Resumo",
+						"versao",
+						"5"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Resumo com filtro de livro",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{biblia-host}}/v1/Resumo/versao/5?livroId=2",
+							"host": [
+								"{{biblia-host}}"
+							],
+							"path": [
+								"v1",
+								"Resumo",
+								"versao",
+								"5"
+							],
+							"query": [
+								{
+									"key": "livroId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 23 Dec 2019 01:06:43 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 2,\n        \"livro\": \"Êxodo\",\n        \"posicao\": 2,\n        \"capitulos\": 40,\n        \"versiculos\": 1213\n    }\n]"
+				},
+				{
+					"name": "Resumo sem filtro",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{biblia-host}}/v1/Resumo/versao/5",
+							"host": [
+								"{{biblia-host}}"
+							],
+							"path": [
+								"v1",
+								"Resumo",
+								"versao",
+								"5"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 23 Dec 2019 01:05:40 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 1,\n        \"livro\": \"Gênesis\",\n        \"posicao\": 1,\n        \"capitulos\": 50,\n        \"versiculos\": 1531\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 2,\n        \"livro\": \"Êxodo\",\n        \"posicao\": 2,\n        \"capitulos\": 40,\n        \"versiculos\": 1213\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 3,\n        \"livro\": \"Levítico\",\n        \"posicao\": 3,\n        \"capitulos\": 27,\n        \"versiculos\": 859\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 4,\n        \"livro\": \"Números\",\n        \"posicao\": 4,\n        \"capitulos\": 36,\n        \"versiculos\": 1286\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 5,\n        \"livro\": \"Deuteronômio\",\n        \"posicao\": 5,\n        \"capitulos\": 34,\n        \"versiculos\": 959\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 6,\n        \"livro\": \"Josué\",\n        \"posicao\": 6,\n        \"capitulos\": 24,\n        \"versiculos\": 658\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 7,\n        \"livro\": \"Juízes\",\n        \"posicao\": 7,\n        \"capitulos\": 21,\n        \"versiculos\": 619\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 8,\n        \"livro\": \"Rute\",\n        \"posicao\": 8,\n        \"capitulos\": 4,\n        \"versiculos\": 85\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 9,\n        \"livro\": \"I Samuel\",\n        \"posicao\": 9,\n        \"capitulos\": 31,\n        \"versiculos\": 811\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 10,\n        \"livro\": \"II Samuel\",\n        \"posicao\": 10,\n        \"capitulos\": 24,\n        \"versiculos\": 695\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 11,\n        \"livro\": \"I Reis\",\n        \"posicao\": 11,\n        \"capitulos\": 22,\n        \"versiculos\": 816\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 12,\n        \"livro\": \"II Reis\",\n        \"posicao\": 12,\n        \"capitulos\": 25,\n        \"versiculos\": 719\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 13,\n        \"livro\": \"I Crônicas\",\n        \"posicao\": 13,\n        \"capitulos\": 29,\n        \"versiculos\": 942\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 14,\n        \"livro\": \"II Crônicas\",\n        \"posicao\": 14,\n        \"capitulos\": 36,\n        \"versiculos\": 822\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 15,\n        \"livro\": \"Esdras\",\n        \"posicao\": 15,\n        \"capitulos\": 10,\n        \"versiculos\": 280\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 16,\n        \"livro\": \"Neemias\",\n        \"posicao\": 16,\n        \"capitulos\": 13,\n        \"versiculos\": 405\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 17,\n        \"livro\": \"Ester\",\n        \"posicao\": 17,\n        \"capitulos\": 10,\n        \"versiculos\": 167\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 18,\n        \"livro\": \"Jó\",\n        \"posicao\": 18,\n        \"capitulos\": 21,\n        \"versiculos\": 879\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 19,\n        \"livro\": \"Salmos\",\n        \"posicao\": 19,\n        \"capitulos\": 150,\n        \"versiculos\": 2461\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 20,\n        \"livro\": \"Provérbios\",\n        \"posicao\": 20,\n        \"capitulos\": 31,\n        \"versiculos\": 915\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 21,\n        \"livro\": \"Eclesiastes\",\n        \"posicao\": 21,\n        \"capitulos\": 12,\n        \"versiculos\": 222\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 22,\n        \"livro\": \"Cântico dos Cânticos\",\n        \"posicao\": 22,\n        \"capitulos\": 8,\n        \"versiculos\": 117\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 23,\n        \"livro\": \"Isaías\",\n        \"posicao\": 23,\n        \"capitulos\": 66,\n        \"versiculos\": 1292\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 24,\n        \"livro\": \"Jeremias\",\n        \"posicao\": 24,\n        \"capitulos\": 52,\n        \"versiculos\": 1364\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 25,\n        \"livro\": \"Lamentações Jeremias\",\n        \"posicao\": 25,\n        \"capitulos\": 5,\n        \"versiculos\": 154\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 26,\n        \"livro\": \"Ezequiel\",\n        \"posicao\": 26,\n        \"capitulos\": 48,\n        \"versiculos\": 1272\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 27,\n        \"livro\": \"Daniel\",\n        \"posicao\": 27,\n        \"capitulos\": 12,\n        \"versiculos\": 357\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 28,\n        \"livro\": \"Oséias\",\n        \"posicao\": 28,\n        \"capitulos\": 14,\n        \"versiculos\": 197\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 29,\n        \"livro\": \"Joel\",\n        \"posicao\": 29,\n        \"capitulos\": 3,\n        \"versiculos\": 73\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 30,\n        \"livro\": \"Amós\",\n        \"posicao\": 30,\n        \"capitulos\": 9,\n        \"versiculos\": 146\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 31,\n        \"livro\": \"Obadias\",\n        \"posicao\": 31,\n        \"capitulos\": 1,\n        \"versiculos\": 21\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 32,\n        \"livro\": \"Jonas\",\n        \"posicao\": 32,\n        \"capitulos\": 4,\n        \"versiculos\": 48\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 33,\n        \"livro\": \"Miquéias\",\n        \"posicao\": 33,\n        \"capitulos\": 7,\n        \"versiculos\": 105\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 34,\n        \"livro\": \"Naum\",\n        \"posicao\": 34,\n        \"capitulos\": 3,\n        \"versiculos\": 47\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 35,\n        \"livro\": \"Habacuque\",\n        \"posicao\": 35,\n        \"capitulos\": 3,\n        \"versiculos\": 56\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 36,\n        \"livro\": \"Sofonias\",\n        \"posicao\": 36,\n        \"capitulos\": 3,\n        \"versiculos\": 53\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 37,\n        \"livro\": \"Ageu\",\n        \"posicao\": 37,\n        \"capitulos\": 2,\n        \"versiculos\": 38\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 38,\n        \"livro\": \"Zacarias\",\n        \"posicao\": 38,\n        \"capitulos\": 14,\n        \"versiculos\": 211\n    },\n    {\n        \"testamentoId\": 1,\n        \"testamento\": \"Antigo Testamento\",\n        \"livroId\": 39,\n        \"livro\": \"Malaquias\",\n        \"posicao\": 39,\n        \"capitulos\": 4,\n        \"versiculos\": 55\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 40,\n        \"livro\": \"Mateus\",\n        \"posicao\": 1,\n        \"capitulos\": 28,\n        \"versiculos\": 1071\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 41,\n        \"livro\": \"Marcos\",\n        \"posicao\": 2,\n        \"capitulos\": 16,\n        \"versiculos\": 678\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 42,\n        \"livro\": \"Lucas\",\n        \"posicao\": 3,\n        \"capitulos\": 24,\n        \"versiculos\": 1150\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 43,\n        \"livro\": \"João\",\n        \"posicao\": 4,\n        \"capitulos\": 21,\n        \"versiculos\": 879\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 44,\n        \"livro\": \"Atos\",\n        \"posicao\": 5,\n        \"capitulos\": 28,\n        \"versiculos\": 1007\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 45,\n        \"livro\": \"Romanos\",\n        \"posicao\": 6,\n        \"capitulos\": 16,\n        \"versiculos\": 433\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 46,\n        \"livro\": \"I Coríntios\",\n        \"posicao\": 7,\n        \"capitulos\": 16,\n        \"versiculos\": 437\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 47,\n        \"livro\": \"II Coríntios\",\n        \"posicao\": 8,\n        \"capitulos\": 13,\n        \"versiculos\": 256\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 48,\n        \"livro\": \"Gálatas\",\n        \"posicao\": 9,\n        \"capitulos\": 6,\n        \"versiculos\": 149\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 49,\n        \"livro\": \"Efésios\",\n        \"posicao\": 10,\n        \"capitulos\": 6,\n        \"versiculos\": 155\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 50,\n        \"livro\": \"Filipenses\",\n        \"posicao\": 11,\n        \"capitulos\": 4,\n        \"versiculos\": 104\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 51,\n        \"livro\": \"Colossenses\",\n        \"posicao\": 12,\n        \"capitulos\": 4,\n        \"versiculos\": 95\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 52,\n        \"livro\": \"I Tessalonicenses\",\n        \"posicao\": 13,\n        \"capitulos\": 5,\n        \"versiculos\": 89\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 53,\n        \"livro\": \"II Tessalonicenses\",\n        \"posicao\": 14,\n        \"capitulos\": 3,\n        \"versiculos\": 47\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 54,\n        \"livro\": \"I Timóteo\",\n        \"posicao\": 15,\n        \"capitulos\": 6,\n        \"versiculos\": 113\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 55,\n        \"livro\": \"II Timóteo\",\n        \"posicao\": 16,\n        \"capitulos\": 4,\n        \"versiculos\": 83\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 56,\n        \"livro\": \"Tito\",\n        \"posicao\": 17,\n        \"capitulos\": 3,\n        \"versiculos\": 46\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 57,\n        \"livro\": \"Filemom\",\n        \"posicao\": 18,\n        \"capitulos\": 1,\n        \"versiculos\": 25\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 58,\n        \"livro\": \"Hebreus\",\n        \"posicao\": 19,\n        \"capitulos\": 13,\n        \"versiculos\": 303\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 59,\n        \"livro\": \"Tiago\",\n        \"posicao\": 20,\n        \"capitulos\": 5,\n        \"versiculos\": 108\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 60,\n        \"livro\": \"I Pedro\",\n        \"posicao\": 21,\n        \"capitulos\": 5,\n        \"versiculos\": 105\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 61,\n        \"livro\": \"II Pedro\",\n        \"posicao\": 22,\n        \"capitulos\": 3,\n        \"versiculos\": 61\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 62,\n        \"livro\": \"I João\",\n        \"posicao\": 23,\n        \"capitulos\": 5,\n        \"versiculos\": 105\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 63,\n        \"livro\": \"II João\",\n        \"posicao\": 24,\n        \"capitulos\": 1,\n        \"versiculos\": 13\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 64,\n        \"livro\": \"III João\",\n        \"posicao\": 25,\n        \"capitulos\": 1,\n        \"versiculos\": 15\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 65,\n        \"livro\": \"Judas\",\n        \"posicao\": 26,\n        \"capitulos\": 1,\n        \"versiculos\": 25\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 66,\n        \"livro\": \"Apocalipse\",\n        \"posicao\": 27,\n        \"capitulos\": 22,\n        \"versiculos\": 405\n    }\n]"
+				},
+				{
+					"name": "Resumo com filtro de testamento",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{biblia-host}}/v1/Resumo/versao/5?testamentoId=2",
+							"host": [
+								"{{biblia-host}}"
+							],
+							"path": [
+								"v1",
+								"Resumo",
+								"versao",
+								"5"
+							],
+							"query": [
+								{
+									"key": "testamentoId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 23 Dec 2019 01:07:27 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 40,\n        \"livro\": \"Mateus\",\n        \"posicao\": 1,\n        \"capitulos\": 28,\n        \"versiculos\": 1071\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 41,\n        \"livro\": \"Marcos\",\n        \"posicao\": 2,\n        \"capitulos\": 16,\n        \"versiculos\": 678\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 42,\n        \"livro\": \"Lucas\",\n        \"posicao\": 3,\n        \"capitulos\": 24,\n        \"versiculos\": 1150\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 43,\n        \"livro\": \"João\",\n        \"posicao\": 4,\n        \"capitulos\": 21,\n        \"versiculos\": 879\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 44,\n        \"livro\": \"Atos\",\n        \"posicao\": 5,\n        \"capitulos\": 28,\n        \"versiculos\": 1007\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 45,\n        \"livro\": \"Romanos\",\n        \"posicao\": 6,\n        \"capitulos\": 16,\n        \"versiculos\": 433\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 46,\n        \"livro\": \"I Coríntios\",\n        \"posicao\": 7,\n        \"capitulos\": 16,\n        \"versiculos\": 437\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 47,\n        \"livro\": \"II Coríntios\",\n        \"posicao\": 8,\n        \"capitulos\": 13,\n        \"versiculos\": 256\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 48,\n        \"livro\": \"Gálatas\",\n        \"posicao\": 9,\n        \"capitulos\": 6,\n        \"versiculos\": 149\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 49,\n        \"livro\": \"Efésios\",\n        \"posicao\": 10,\n        \"capitulos\": 6,\n        \"versiculos\": 155\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 50,\n        \"livro\": \"Filipenses\",\n        \"posicao\": 11,\n        \"capitulos\": 4,\n        \"versiculos\": 104\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 51,\n        \"livro\": \"Colossenses\",\n        \"posicao\": 12,\n        \"capitulos\": 4,\n        \"versiculos\": 95\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 52,\n        \"livro\": \"I Tessalonicenses\",\n        \"posicao\": 13,\n        \"capitulos\": 5,\n        \"versiculos\": 89\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 53,\n        \"livro\": \"II Tessalonicenses\",\n        \"posicao\": 14,\n        \"capitulos\": 3,\n        \"versiculos\": 47\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 54,\n        \"livro\": \"I Timóteo\",\n        \"posicao\": 15,\n        \"capitulos\": 6,\n        \"versiculos\": 113\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 55,\n        \"livro\": \"II Timóteo\",\n        \"posicao\": 16,\n        \"capitulos\": 4,\n        \"versiculos\": 83\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 56,\n        \"livro\": \"Tito\",\n        \"posicao\": 17,\n        \"capitulos\": 3,\n        \"versiculos\": 46\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 57,\n        \"livro\": \"Filemom\",\n        \"posicao\": 18,\n        \"capitulos\": 1,\n        \"versiculos\": 25\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 58,\n        \"livro\": \"Hebreus\",\n        \"posicao\": 19,\n        \"capitulos\": 13,\n        \"versiculos\": 303\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 59,\n        \"livro\": \"Tiago\",\n        \"posicao\": 20,\n        \"capitulos\": 5,\n        \"versiculos\": 108\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 60,\n        \"livro\": \"I Pedro\",\n        \"posicao\": 21,\n        \"capitulos\": 5,\n        \"versiculos\": 105\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 61,\n        \"livro\": \"II Pedro\",\n        \"posicao\": 22,\n        \"capitulos\": 3,\n        \"versiculos\": 61\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 62,\n        \"livro\": \"I João\",\n        \"posicao\": 23,\n        \"capitulos\": 5,\n        \"versiculos\": 105\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 63,\n        \"livro\": \"II João\",\n        \"posicao\": 24,\n        \"capitulos\": 1,\n        \"versiculos\": 13\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 64,\n        \"livro\": \"III João\",\n        \"posicao\": 25,\n        \"capitulos\": 1,\n        \"versiculos\": 15\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 65,\n        \"livro\": \"Judas\",\n        \"posicao\": 26,\n        \"capitulos\": 1,\n        \"versiculos\": 25\n    },\n    {\n        \"testamentoId\": 2,\n        \"testamento\": \"Novo Testamento\",\n        \"livroId\": 66,\n        \"livro\": \"Apocalipse\",\n        \"posicao\": 27,\n        \"capitulos\": 22,\n        \"versiculos\": 405\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Quantidade de versículos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67509fa5-aaab-43ab-a3a6-7a4ec20a1c5b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Deve retornar versão', function(){",
+							"   pm.expect(data.versao).to.be.a('number');",
+							"});",
+							"",
+							"pm.test('Deve retornar livro', function(){",
+							"   pm.expect(data.livro).to.be.a('number');",
+							"});",
+							"",
+							"pm.test('Deve retornar capítulo', function(){",
+							"   pm.expect(data.capitulo).to.be.a('number');",
+							"});",
+							"",
+							"pm.test('Deve retornar quantidade de versículos', function(){",
+							"   pm.expect(data.versiculos).to.be.a('number');",
+							"});",
+							"",
+							"pm.test('Deve retornar quantidade de versículos do livro 47, capítulo 2', function(){",
+							"   pm.expect(5).to.equal(data.versao);",
+							"   pm.expect(47).to.equal(data.livro);",
+							"   pm.expect(2).to.equal(data.capitulo);",
+							"   pm.expect(17).to.equal(data.versiculos);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{biblia-host}}/v1/Versao/5/Livro/47/Capitulo/2/quantidade-versiculos",
+					"host": [
+						"{{biblia-host}}"
+					],
+					"path": [
+						"v1",
+						"Versao",
+						"5",
+						"Livro",
+						"47",
+						"Capitulo",
+						"2",
+						"quantidade-versiculos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "quantidade-versiculos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44340/v1/Versao/5/Livro/47/Capitulo/2/quantidade-versiculos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44340",
+							"path": [
+								"v1",
+								"Versao",
+								"5",
+								"Livro",
+								"47",
+								"Capitulo",
+								"2",
+								"quantidade-versiculos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "X-SourceFiles",
+							"value": "=?UTF-8?B?RTpcTWV1cyBkb2N1bWVudG9zXFByb2pldG9zXE1NVGVjaFxCaWJsaWFcc3JjXEJpYmxpYVx2MVxWZXJzYW9cNVxMaXZyb1w0N1xDYXBpdHVsb1wyXHF1YW50aWRhZGUtdmVyc2ljdWxvcw==?="
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 20 Dec 2019 00:38:23 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"versao\": 5,\n    \"livro\": 47,\n    \"capitulo\": 2,\n    \"versiculos\": 17\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}

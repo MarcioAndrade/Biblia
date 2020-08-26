@@ -1,0 +1,14 @@
+{
+	"id": "1c2b6ce9-56d0-4055-8960-fba1a35ab96f",
+	"name": "biblia-debug",
+	"values": [
+		{
+			"key": "biblia-host",
+			"value": "https://localhost:44340",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-08-26T02:25:07.498Z",
+	"_postman_exported_using": "Postman/7.31.0"
+}

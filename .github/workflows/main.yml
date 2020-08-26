@@ -22,3 +22,6 @@ jobs:
     
     - name: Testes
       run: dotnet test ./src
+      
+    - name: Install-Newman
+      run: npm install -g newman

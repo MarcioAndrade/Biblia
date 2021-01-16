@@ -278,7 +278,7 @@ namespace Biblia.Repositorio
 												FROM 
 													CaixaPromessas v
 												WHERE 
-													v.id = @caixaPromessaId
+													v.id = @caixaPromessa
 										  ";
 
 					return await Conexao.QueryAsync<CaixaPromessas>(query, new { caixaPromessa });

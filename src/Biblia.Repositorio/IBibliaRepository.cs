@@ -6,16 +6,17 @@ namespace Biblia.Repositorio
 {
     public interface IBibliaRepository
     {
-        Task<IEnumerable<Livro>> ListarLivrosAsync(int? testamentoId);
+        Task<IEnumerable<Livro>> ListarLivrosAsync(int? testamento);
         Task<IEnumerable<Versao>> ListarVersoesAsync();
         Task<int> ObterQuantidadeCapitulosDoLivroAsync(int id);
-        Task<int> ObterQuantidadeVersiculosNoCapituloDoLivroAsync(int idLivro, int idCapitulo);
+        Task<int> ObterQuantidadeVersiculosNoCapituloDoLivroAsync(int livro, int capitulo);
         Task<Versiculo> ObterVersiculoAsync(int versao, int livro, int capitulo, int numero);
-        Task<IEnumerable<Resumo>> ListarResumosLivrosAsync(int versaoId, int? testamentoId, int? livroId);
-        Task<dynamic> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo);
+        Task<IEnumerable<Resumo>> ListarResumosLivrosAsync(int versao, int? testamento, int? livro);
+        Task<dynamic> ObterQuantidadeVersiculosNoCapituloAsync(int versao, int livro, int capitulo);
         Task<int> ObterQuantidadeCaixaPromessasAsync();
-        Task<IEnumerable<CaixaPromessas>> ObterVersiculosDaCaixaPromessasAsync(int caixaPromessaId);
+        Task<IEnumerable<CaixaPromessas>> ObterVersiculosDaCaixaPromessasAsync(int caixaPromessa);
+        Task<IEnumerable<Versiculo>> ObterVersiculosAsync(int versao, int livro, int capitulo);
         Task<IEnumerable<Versiculo>> ObterVersiculosAsync(int versao, int livro, int capitulo, IEnumerable<int> numeros);
-        Task<Livro> ObterLivroAsync(int livroId);
+        Task<Livro> ObterLivroAsync(int livro);
     }
 }

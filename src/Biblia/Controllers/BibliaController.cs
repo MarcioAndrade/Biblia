@@ -104,11 +104,37 @@ namespace Biblia.Controllers
         /// <param name="numero">Versículo</param>
         /// <returns>Versículo buscado. Caso não encontre o versículo com os parâmetros passados retorna vazio</returns>
         [HttpGet("versao/{versaoId}/livro/{livroId}/capitulo/{capitulo}/numero/{numero}")]
-        public async Task<VersiculoViewModel> VersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<VersiculoViewModel> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
             try
             {
                 return await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
+            }
+            catch (BibliaException)
+            {
+                // Logar Excecao
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Recurso retorna os versículos do capítulo de uma versão e livro
+        /// </summary>
+        /// <param name="versaoId">Versão de 1 a 6. Pode ser obtida pelo recurso api/versoes</param>
+        /// <param name="livroId">Número identificador do livro. Pode ser obtido pelo recurso api/livros</param>
+        /// <param name="capitulo">Capítulo do livro</param>
+        /// <returns>Versículos buscado. Caso não encontre o capítulo do livro com os parâmetros passados retorna vazio</returns>
+        [HttpGet("versao/{versaoId}/livro/{livroId}/capitulo/{capitulo}/versiculos")]
+        public async Task<IEnumerable<VersiculoViewModel>> ObterVersiculosAsync(int versaoId, int livroId, int capitulo)
+        {
+            try
+            {
+                return await _bibliaApp.ObterVersiculosAsync(versaoId, livroId, capitulo);
             }
             catch (BibliaException)
             {

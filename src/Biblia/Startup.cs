@@ -26,8 +26,8 @@ namespace Biblia
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<BibliaRepository>();
             services.AddScoped<IBibliaApp, BibliaApp>();
+            services.AddScoped<IBibliaRepository, BibliaRepository>();
 
             services.AddSwaggerGen(c =>
             {

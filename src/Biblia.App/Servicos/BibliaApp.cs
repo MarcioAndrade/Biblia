@@ -77,5 +77,39 @@ namespace Biblia.App.Servicos
             var versiculos = await _versiculoRepository.ObterVersiculosAsync(versao, livro, capitulo);
             return Mapper.Map<IEnumerable<VersiculoViewModel>>(versiculos);
         }
+
+        public async Task<IEnumerable<CaixaPromessaViewModel>> ListarCaixinhaDePromessasAsync(int? livroId, int? capituloId, int? versiculoId)
+        {
+            var retorno = new List<CaixaPromessaViewModel>();
+
+            var versosDaCaixinha = await _versiculoRepository.ObterCaixinhaDePromessaAsync(livroId, capituloId, versiculoId);
+
+            foreach (var item in versosDaCaixinha)
+                retorno.Add(new CaixaPromessaViewModel { Id = item.id, Referencia = item.livro + " " + item.capitulo + ":" + item.versiculo, Texto = item.texto });
+
+            return retorno;
+        }
+
+        public async Task<IEnumerable<CaixaPromessaViewModel>> CadastrarCaixinhaDePromessasAsync(IEnumerable<CadastroCaixinhaPromessaRequest> cadastrosCaixinhasPromessas)
+        {
+            var tasks = new List<Task>();
+            var retorno = new List<CaixaPromessaViewModel>();
+
+            var id = await _versiculoRepository.ObterQuantidadeCaixaPromessasAsync();
+
+            foreach (var item in cadastrosCaixinhasPromessas)
+                tasks.Add(_versiculoRepository.CadastrarCaixinhaDePromessaAsync(id + 1, item.LivroId, item.CapituloId, item.VersiculoId));
+
+            await Task.WhenAll(tasks);
+
+            var retornosDynamic = new List<dynamic>();
+            foreach (var item in cadastrosCaixinhasPromessas)
+                retornosDynamic.AddRange(await _versiculoRepository.ObterCaixinhaDePromessaAsync(item.LivroId, item.CapituloId, item.VersiculoId));
+
+            foreach (var item in retornosDynamic)
+                retorno.Add(new CaixaPromessaViewModel { Id = item.id, Referencia = item.livro + " " + item.capitulo + ":" + item.versiculo, Texto = item.texto });
+
+            return retorno;
+        }
     }
 }

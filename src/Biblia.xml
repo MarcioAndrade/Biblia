@@ -21,6 +21,18 @@
             </summary>
             <returns>Versículo</returns>
         </member>
+        <member name="M:Biblia.Controllers.BibliaController.ListarCaixinhaPromessasAsync(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Caixinha de promessas retorna os versículos cadastrados
+            </summary>
+            <returns>Versículo</returns>
+        </member>
+        <member name="M:Biblia.Controllers.BibliaController.CadastrarCaixinhaPromessasAsync(System.Collections.Generic.IEnumerable{Biblia.App.DTO.CadastroCaixinhaPromessaRequest})">
+            <summary>
+            Caixinha de promessas retorna os versículos cadastrados
+            </summary>
+            <returns>Versículo</returns>
+        </member>
         <member name="M:Biblia.Controllers.BibliaController.ObterLivrosAsync(System.Nullable{System.Int32})">
             <summary>
             Recurso retorna os livros do antigo e novo testamento

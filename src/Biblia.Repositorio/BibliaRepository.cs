@@ -378,8 +378,86 @@ namespace Biblia.Repositorio
 				{
 					throw new ObterLivroException(ex.Message);
 				}
-
 			}
 		}
-	}
+
+		public async Task<IEnumerable<dynamic>> ObterCaixinhaDePromessaAsync(int? livro, int? capitulo, int? versiculo)
+        {
+			using (Conexao)
+			{
+				try
+				{
+					var query = @"
+									SELECT 
+										c.id, 
+										l.nome as livro, 
+										v.capitulo, 
+										v.numero as versiculo, 
+										v.texto
+									FROM 
+										CaixaPromessas c
+									INNER JOIN 
+										Livros l ON c.livroId = l.id
+									INNER JOIN 
+										Versiculos v ON l.id = v.livroId AND v.capitulo = c.capituloId AND v.numero = c.numeroVersiculo
+									WHERE 
+										versaoId = @versaoId
+								";
+
+					var dynamicParameters = new DynamicParameters();
+					dynamicParameters.Add("versaoId", 5);
+					
+					if (livro.HasValue)
+                    {
+						dynamicParameters.Add("livroId", livro);
+						query += " AND c.livroId = @livroId ";
+					}
+
+					if (capitulo.HasValue)
+					{
+						dynamicParameters.Add("capituloId", capitulo);
+						query += " AND c.capituloId = @capituloId ";
+					}
+
+					if (versiculo.HasValue)
+					{
+						dynamicParameters.Add("versiculoId", versiculo);
+						query += " AND c.numeroVersiculo = @versiculoId ";
+					}
+
+					query += " ORDER BY 2, 3, 4 ";
+
+					return await Conexao.QueryAsync<dynamic>(query, dynamicParameters);
+
+				}
+				catch (Exception ex)
+				{
+					throw new ObterCaixinhaDePromessaException(ex.Message);
+				}
+			}
+		}
+
+        public async Task CadastrarCaixinhaDePromessaAsync(int id, int livroId, int capituloId, int versiculoId)
+        {
+			using (Conexao)
+			{
+				try
+				{
+					const string query = @"												
+												INSERT INTO 
+													CaixaPromessas (id, livroId, capituloId, numeroVersiculo)
+												VALUES
+													(@id, @livroId, @capituloId, @versiculoId)												
+										  ";
+
+					await Conexao.ExecuteAsync(query, new { id, livroId, capituloId, versiculoId });
+
+				}
+				catch (Exception ex)
+				{
+					throw new CadastrarCaixinhaDePromessaException(ex.Message);
+				}
+			}
+		}
+    }
 }

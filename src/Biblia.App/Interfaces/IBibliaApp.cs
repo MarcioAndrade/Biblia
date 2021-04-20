@@ -7,6 +7,8 @@ namespace Biblia.App.Interfaces
     public interface IBibliaApp
     {
         Task<CaixaPromessaViewModel> CaixinhaDePromessasAsync();
+        Task<IEnumerable<CaixaPromessaViewModel>> ListarCaixinhaDePromessasAsync(int? livroId, int? capituloId, int? veiculoId);
+        Task<IEnumerable<CaixaPromessaViewModel>> CadastrarCaixinhaDePromessasAsync(IEnumerable<CadastroCaixinhaPromessaRequest> cadastrosCaixinhasPromessas);
         Task<IEnumerable<LivroViewModel>> LivrosAsync(int? testamento);
         Task<IEnumerable<VersaoViewModel>> VersoesAsync();
         Task<VersiculoViewModel> ObterVersiculoAsync(int versao, int livro, int capitulo, int numero);

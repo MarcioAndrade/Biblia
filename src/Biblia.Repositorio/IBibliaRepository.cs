@@ -18,5 +18,7 @@ namespace Biblia.Repositorio
         Task<IEnumerable<Versiculo>> ObterVersiculosAsync(int versao, int livro, int capitulo);
         Task<IEnumerable<Versiculo>> ObterVersiculosAsync(int versao, int livro, int capitulo, IEnumerable<int> numeros);
         Task<Livro> ObterLivroAsync(int livro);
+        Task<IEnumerable<dynamic>> ObterCaixinhaDePromessaAsync(int? livro, int? capitulo, int? versiculo);
+        Task CadastrarCaixinhaDePromessaAsync(int id, int livroId, int capituloId, int versiculoId);
     }
 }

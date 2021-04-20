@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Biblia.Repositorio.Excecoes;
+using System.Linq;
 
 namespace Biblia.Controllers
 {
@@ -46,6 +47,59 @@ namespace Biblia.Controllers
             catch (Exception)
             {
                 return new StatusCodeResult(500);
+            }
+        }
+
+        /// <summary>
+        /// Caixinha de promessas retorna os versículos cadastrados
+        /// </summary>
+        /// <returns>Versículo</returns>
+        [HttpGet("caixinha-de-promessas/listar")]
+        public async Task<IActionResult> ListarCaixinhaPromessasAsync([FromQuery] int? livroId, [FromQuery] int? capituloId, [FromQuery] int? versiculoId)
+        {
+            try
+            {
+                var lista = await _bibliaApp.ListarCaixinhaDePromessasAsync(livroId, capituloId, versiculoId);
+
+                if (lista == null || !lista.Any())
+                    return NoContent();
+
+                return Ok(lista);
+            }
+            catch (BibliaException)
+            {
+                // Logar Excecao
+
+                return StatusCode(500, "Falha ao consultar lista de caixinha de promessas");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Falha ao consultar lista de caixinha de promessas");
+            }
+        }
+
+        /// <summary>
+        /// Caixinha de promessas retorna os versículos cadastrados
+        /// </summary>
+        /// <returns>Versículo</returns>
+        [HttpPost("caixinha-de-promessas")]
+        public async Task<IActionResult> CadastrarCaixinhaPromessasAsync([FromBody]IEnumerable<CadastroCaixinhaPromessaRequest> cadastroCaixinhasPromessa)
+        {
+            try
+            {
+                var lista = await _bibliaApp.CadastrarCaixinhaDePromessasAsync(cadastroCaixinhasPromessa);
+
+                return Created("", lista);
+            }
+            catch (BibliaException)
+            {
+                // Logar Excecao
+
+                return StatusCode(500, "Falha ao consultar lista de caixinha de promessas");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Falha ao consultar lista de caixinha de promessas");
             }
         }
 

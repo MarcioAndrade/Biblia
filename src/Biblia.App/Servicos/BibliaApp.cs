@@ -39,7 +39,7 @@ namespace Biblia.App.Servicos
             if (versiculos.Count() > 1)
                 referencia += $"-{versiculos.Max(x => x.Numero)}";
 
-            return new CaixaPromessaViewModel { Id = caixaPromessaId, Referencia = referencia, Texto = texto, ContinuarLendo = $@"https://localhost:44340/v1/versao/{versaoId}/livro/{livroId}/capitulo/{capituloId}/versiculos" };
+            return new CaixaPromessaViewModel { Id = caixaPromessaId, Referencia = referencia, Texto = texto, ContinuarLendo = $@"/v1/versao/{versaoId}/livro/{livroId}/capitulo/{capituloId}/versiculos" };
         }
 
         public async Task<IEnumerable<LivroViewModel>> LivrosAsync(int? testamento)

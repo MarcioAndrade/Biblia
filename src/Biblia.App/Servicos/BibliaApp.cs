@@ -19,6 +19,8 @@ namespace Biblia.App.Servicos
 
         public async Task<CaixaPromessaViewModel> CaixinhaDePromessasAsync()
         {
+            const int versaoId = 3;
+
             var qtdCaixaPromessa = await _versiculoRepository.ObterQuantidadeCaixaPromessasAsync();
             var caixaPromessaId = new Random(DateTime.Now.Millisecond).Next(1, qtdCaixaPromessa);
 
@@ -29,7 +31,7 @@ namespace Biblia.App.Servicos
             var numerosVersiculos = versiculosCaixaPromessas.Select(x => x.NumeroVersiculo);
 
             var livro = await _versiculoRepository.ObterLivroAsync(livroId);
-            var versiculos = await _versiculoRepository.ObterVersiculosAsync(5, livroId, capituloId, numerosVersiculos);
+            var versiculos = await _versiculoRepository.ObterVersiculosAsync(versaoId, livroId, capituloId, numerosVersiculos);
 
             var referencia = $"{livro.Nome} {capituloId}:{versiculos.Min(x => x.Numero)}";
             var texto = string.Join(" ", versiculos.Select(x => x.Texto));
@@ -37,7 +39,7 @@ namespace Biblia.App.Servicos
             if (versiculos.Count() > 1)
                 referencia += $"-{versiculos.Max(x => x.Numero)}";
 
-            return new CaixaPromessaViewModel { Id = caixaPromessaId, Referencia = referencia, Texto = texto };
+            return new CaixaPromessaViewModel { Id = caixaPromessaId, Referencia = referencia, Texto = texto, ContinuarLendo = $@"https://localhost:44340/v1/versao/{versaoId}/livro/{livroId}/capitulo/{capituloId}/versiculos" };
         }
 
         public async Task<IEnumerable<LivroViewModel>> LivrosAsync(int? testamento)
@@ -68,7 +70,6 @@ namespace Biblia.App.Servicos
         public async Task<QuantidadeVersiculosCapitulo> ObterQuantidadeVersiculosNoCapituloAsync(int versao, int livro, int capitulo)
         {
             var quantidadeDynamic = await _versiculoRepository.ObterQuantidadeVersiculosNoCapituloAsync(versao, livro, capitulo);
-
             return Mapper.Map<QuantidadeVersiculosCapitulo>(quantidadeDynamic);
         }
 

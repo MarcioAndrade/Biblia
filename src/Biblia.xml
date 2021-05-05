@@ -81,5 +81,12 @@
             <param name="capitulo">Capítulo do livro que deseja consultar</param>
             <returns>Quantidade de versículos em capítulo</returns>
         </member>
+        <member name="M:Biblia.Controllers.BibliaController.ObterVersiculosPorTextoAsync(System.String)">
+            <summary>
+            Recurso retorna versículos que contenham o texto passado como parâmetro
+            </summary>
+            <param name="texto">Texto usado para busca</param>
+            <returns>Versículos que contenham a ocorrência do texto</returns>
+        </member>
     </members>
 </doc>

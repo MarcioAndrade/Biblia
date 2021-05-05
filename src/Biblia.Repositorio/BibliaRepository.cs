@@ -370,6 +370,48 @@ namespace Biblia.Repositorio
             }
         }
 
+        public async Task<IEnumerable<Versiculo>> ObterVersiculosAsync(string texto)
+        {
+            using (Conexao)
+            {
+                try
+                {
+                    const string query = @"
+                                                SELECT 
+	                                                v.id, 
+	                                                v.versaoId,
+	                                                v.capitulo, 
+	                                                v.numero, 
+	                                                v.texto,
+                                                    l.id,
+	                                                l.nome, 
+	                                                l.testamentoId,
+	                                                l.posicao
+                                                FROM 
+	                                                Livros l 
+                                                INNER JOIN 
+	                                                Versiculos v ON l.id = v.livroId 
+                                                WHERE 
+	                                                UPPER(v.texto) LIKE @txt
+								            ";
+
+                    var likeTrick = $"%{texto.ToUpperInvariant()}%";
+                    return await Conexao.QueryAsync<Versiculo, Livro, Versiculo>(query, 
+                        map: (versiculo, livro) =>
+                        {
+                            versiculo.Livro = livro;
+                            return versiculo;
+                        },
+                        new { txt = likeTrick },
+                    splitOn: "id,id");
+                }
+                catch (Exception ex)
+                {
+                    throw new ObterVersiculoException(ex.Message);
+                }
+            }
+        }
+
         public async Task<Livro> ObterLivroAsync(int livro)
         {
             using (Conexao)

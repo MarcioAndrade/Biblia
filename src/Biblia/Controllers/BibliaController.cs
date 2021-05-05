@@ -252,5 +252,29 @@ namespace Biblia.Controllers
                 throw;
             }
         }
+
+        /// <summary>
+        /// Recurso retorna versículos que contenham o texto passado como parâmetro
+        /// </summary>
+        /// <param name="texto">Texto usado para busca</param>
+        /// <returns>Versículos que contenham a ocorrência do texto</returns>
+        [HttpGet("buscar/{texto}")]
+        public async Task<IEnumerable<VersiculoViewModel>> ObterVersiculosPorTextoAsync(string texto)
+        {
+            try
+            {
+                return await _bibliaApp.ObterPorTexto(texto);
+            }
+            catch (BibliaException)
+            {
+                // Logar Excecao
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

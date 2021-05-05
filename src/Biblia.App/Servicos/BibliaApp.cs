@@ -112,5 +112,12 @@ namespace Biblia.App.Servicos
 
             return retorno;
         }
+
+        public async Task<IEnumerable<VersiculoViewModel>> ObterPorTexto(string texto)
+        {
+            var versiculos = await _versiculoRepository.ObterVersiculosAsync(texto);
+
+            return Mapper.Map<IEnumerable<VersiculoViewModel>>(versiculos);
+        }
     }
 }

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblia.API", "Biblia.API\Biblia.API.csproj", "{335C36DF-5396-4246-9BA2-974E6BD5707A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Apresentacao", "1-Apresentacao", "{7975D995-ED36-4936-9327-E759539C1CFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Aplicacao", "2-Aplicacao", "{5BDBFAD5-A0B6-4D32-B6BF-DD5572A11C0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Dominio", "3-Dominio", "{70BBB587-692D-4A5F-80CE-BD9DCE59FEFF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Infra", "4-Infra", "{BAF83BDA-386F-499A-8CFA-4C05C63C4DAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblia.App", "Biblia.App\Biblia.App.csproj", "{6DD27F30-64C7-4DEF-A10F-0D24D4B429B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblia.Domain", "Biblia.Domain\Biblia.Domain.csproj", "{A3E401DC-2F34-4331-A75C-F8C77B14FE3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblia.Repositorio", "Biblia.Repositorio\Biblia.Repositorio.csproj", "{C62F2E0E-520D-4CEF-8E96-9E448ACE2855}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{335C36DF-5396-4246-9BA2-974E6BD5707A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335C36DF-5396-4246-9BA2-974E6BD5707A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335C36DF-5396-4246-9BA2-974E6BD5707A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335C36DF-5396-4246-9BA2-974E6BD5707A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DD27F30-64C7-4DEF-A10F-0D24D4B429B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD27F30-64C7-4DEF-A10F-0D24D4B429B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD27F30-64C7-4DEF-A10F-0D24D4B429B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD27F30-64C7-4DEF-A10F-0D24D4B429B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3E401DC-2F34-4331-A75C-F8C77B14FE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E401DC-2F34-4331-A75C-F8C77B14FE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E401DC-2F34-4331-A75C-F8C77B14FE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E401DC-2F34-4331-A75C-F8C77B14FE3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62F2E0E-520D-4CEF-8E96-9E448ACE2855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62F2E0E-520D-4CEF-8E96-9E448ACE2855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62F2E0E-520D-4CEF-8E96-9E448ACE2855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62F2E0E-520D-4CEF-8E96-9E448ACE2855}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{335C36DF-5396-4246-9BA2-974E6BD5707A} = {7975D995-ED36-4936-9327-E759539C1CFE}
+		{6DD27F30-64C7-4DEF-A10F-0D24D4B429B3} = {5BDBFAD5-A0B6-4D32-B6BF-DD5572A11C0F}
+		{A3E401DC-2F34-4331-A75C-F8C77B14FE3C} = {70BBB587-692D-4A5F-80CE-BD9DCE59FEFF}
+		{C62F2E0E-520D-4CEF-8E96-9E448ACE2855} = {BAF83BDA-386F-499A-8CFA-4C05C63C4DAC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {813523ED-0A7B-4EE7-80BC-5DC08F4E9BED}
+	EndGlobalSection
+EndGlobal

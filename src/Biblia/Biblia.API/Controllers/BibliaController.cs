@@ -14,7 +14,7 @@ namespace Biblia.API.Controllers
     [Route("v1")]
     public class BibliaController : ControllerBase
     {
-        private readonly ILogger<BibliaController> _logger; 
+        private readonly ILogger<BibliaController> _logger;
         private IBibliaApp _bibliaApp { get; }
 
         public BibliaController(ILogger<BibliaController> logger, IBibliaApp bibliaApp)
@@ -34,14 +34,9 @@ namespace Biblia.API.Controllers
             {
                 return await _bibliaApp.CaixinhaDePromessasAsync();
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return new StatusCodeResult(500);
-            }
-            catch (Exception)
-            {
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
                 return new StatusCodeResult(500);
             }
         }
@@ -62,15 +57,10 @@ namespace Biblia.API.Controllers
 
                 return Ok(lista);
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return StatusCode(500, "Falha ao consultar lista de caixinha de promessas");
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Falha ao consultar lista de caixinha de promessas");
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
 
@@ -87,15 +77,10 @@ namespace Biblia.API.Controllers
 
                 return Created("", lista);
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return StatusCode(500, "Falha ao consultar lista de caixinha de promessas");
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Falha ao consultar lista de caixinha de promessas");
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
 
@@ -104,21 +89,16 @@ namespace Biblia.API.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
         [HttpGet("livros")]
-        public async Task<IEnumerable<LivroViewModel>> ObterLivrosAsync([FromQuery] int? testamentoId)
+        public async Task<IActionResult> ObterLivrosAsync([FromQuery] int? testamentoId)
         {
             try
             {
-                return await _bibliaApp.LivrosAsync(testamentoId);
+                return Ok(await _bibliaApp.LivrosAsync(testamentoId));
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return null;
-            }
-            catch (Exception)
-            {
-                throw;
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
 
@@ -127,21 +107,16 @@ namespace Biblia.API.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição da versão</returns>
         [HttpGet("versoes")]
-        public async Task<IEnumerable<VersaoViewModel>> VersoesAsync()
+        public async Task<IActionResult> VersoesAsync()
         {
             try
             {
-                return await _bibliaApp.VersoesAsync();
+                return Ok(await _bibliaApp.VersoesAsync());
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return null;
-            }
-            catch (Exception)
-            {
-                throw;
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
 
@@ -154,21 +129,16 @@ namespace Biblia.API.Controllers
         /// <param name="numero">Versículo</param>
         /// <returns>Versículo buscado. Caso não encontre o versículo com os parâmetros passados retorna vazio</returns>
         [HttpGet("versao/{versaoId}/livro/{livroId}/capitulo/{capitulo}/numero/{numero}")]
-        public async Task<VersiculoViewModel> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
+        public async Task<IActionResult> ObterVersiculoAsync(int versaoId, int livroId, int capitulo, int numero)
         {
             try
             {
-                return await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero);
+                return Ok(await _bibliaApp.ObterVersiculoAsync(versaoId, livroId, capitulo, numero));
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return null;
-            }
-            catch (Exception)
-            {
-                throw;
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
 
@@ -180,21 +150,16 @@ namespace Biblia.API.Controllers
         /// <param name="capitulo">Capítulo do livro</param>
         /// <returns>Versículos buscado. Caso não encontre o capítulo do livro com os parâmetros passados retorna vazio</returns>
         [HttpGet("versao/{versaoId}/livro/{livroId}/capitulo/{capitulo}/versiculos")]
-        public async Task<IEnumerable<VersiculoViewModel>> ObterVersiculosAsync(int versaoId, int livroId, int capitulo)
+        public async Task<IActionResult> ObterVersiculosAsync(int versaoId, int livroId, int capitulo)
         {
             try
             {
-                return await _bibliaApp.ObterVersiculosAsync(versaoId, livroId, capitulo);
+                return Ok(await _bibliaApp.ObterVersiculosAsync(versaoId, livroId, capitulo));
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return null;
-            }
-            catch (Exception)
-            {
-                throw;
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
 
@@ -205,21 +170,17 @@ namespace Biblia.API.Controllers
         /// </summary>
         /// <returns>Lista com identificador e a descrição dos livros</returns>
         [HttpGet("Resumo/versao/{versaoId}")]
-        public async Task<IEnumerable<ResumoViewModel>> ObterResumoLivrosAsync(int versaoId, [FromQuery] int? testamentoId, [FromQuery] int? livroId)
+        public async Task<IActionResult> ObterResumoLivrosAsync(int versaoId, [FromQuery] int? testamentoId, [FromQuery] int? livroId)
         {
             try
             {
-                return await _bibliaApp.ObterResumoLivrosAsync(versaoId, testamentoId, livroId);
+                return Ok(await _bibliaApp.ObterResumoLivrosAsync(versaoId, testamentoId, livroId));
             }
-            catch (BibliaException)
-            {
-                // Logar Excecao
 
-                return null;
-            }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
 
@@ -231,21 +192,16 @@ namespace Biblia.API.Controllers
         /// <param name="capitulo">Capítulo do livro que deseja consultar</param>
         /// <returns>Quantidade de versículos em capítulo</returns>
         [HttpGet("Versao/{versaoId}/Livro/{livroId}/Capitulo/{capitulo}/quantidade-versiculos")]
-        public async Task<QuantidadeVersiculosCapitulo> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
+        public async Task<IActionResult> ObterQuantidadeVersiculosNoCapituloAsync(int versaoId, int livroId, int capitulo)
         {
             try
             {
-                return await _bibliaApp.ObterQuantidadeVersiculosNoCapituloAsync(versaoId, livroId, capitulo);
+                return Ok(await _bibliaApp.ObterQuantidadeVersiculosNoCapituloAsync(versaoId, livroId, capitulo));
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return null;
-            }
-            catch (Exception)
-            {
-                throw;
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
 
@@ -255,21 +211,16 @@ namespace Biblia.API.Controllers
         /// <param name="texto">Texto usado para busca</param>
         /// <returns>Versículos que contenham a ocorrência do texto</returns>
         [HttpGet("buscar/{texto}")]
-        public async Task<IEnumerable<VersiculoViewModel>> ObterVersiculosPorTextoAsync(string texto)
+        public async Task<IActionResult> ObterVersiculosPorTextoAsync(string texto)
         {
             try
             {
-                return await _bibliaApp.ObterPorTexto(texto);
+                return Ok(await _bibliaApp.ObterPorTexto(texto));
             }
-            catch (BibliaException)
+            catch (Exception ex)
             {
-                // Logar Excecao
-
-                return null;
-            }
-            catch (Exception)
-            {
-                throw;
+                _logger.LogError(ex.Source, ex.Message, ex.StackTrace);
+                return new StatusCodeResult(500);
             }
         }
     }

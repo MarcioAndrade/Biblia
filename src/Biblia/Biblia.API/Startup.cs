@@ -1,9 +1,14 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi;
+using System;
+using System.Linq;
+using System.Text.Json;
 
 using Biblia.App.Interfaces;
 using Biblia.App.Servicos;
@@ -45,6 +50,13 @@ public class Startup(IConfiguration configuration)
 
             //c.IncludeXmlComments(Path.Combine(basePath, fileName));
         });
+        services.AddHealthChecks()
+            .AddMySql(
+                Configuration.GetConnectionString("BibliaConn"),
+                name: "BancoDeDados",
+                timeout: TimeSpan.FromSeconds(5),
+                tags: ["db", "ready"]
+        );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +91,28 @@ public class Startup(IConfiguration configuration)
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapHealthChecks("/health", new HealthCheckOptions
+            {
+                ResponseWriter = async (context, report) =>
+                {
+                    context.Response.ContentType = "application/json";
+                    var result = JsonSerializer.Serialize(new
+                    {
+                        status = report.Status.ToString(),
+                        totalDuration = report.TotalDuration.ToString(),
+                        entries = report.Entries.ToDictionary(
+                            e => e.Key,
+                            e => new
+                            {
+                                status = e.Value.Status.ToString(),
+                                duration = e.Value.Duration.ToString(),
+                                tags = e.Value.Tags,
+                                data = e.Value.Data
+                            })
+                    });
+                    await context.Response.WriteAsync(result);
+                }
+            });
         });
     }
 }

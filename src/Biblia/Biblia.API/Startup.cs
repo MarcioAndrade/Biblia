@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -13,11 +13,18 @@ using System.Text.Json;
 using Biblia.App.Interfaces;
 using Biblia.App.Servicos;
 using Biblia.Repositorio;
+using System.Collections.Generic;
 
 namespace Biblia.API;
-public class Startup(IConfiguration configuration)
+
+public class Startup
 {
-    public IConfiguration Configuration { get; } = configuration;
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -55,7 +62,7 @@ public class Startup(IConfiguration configuration)
                 Configuration.GetConnectionString("BibliaConn"),
                 name: "BancoDeDados",
                 timeout: TimeSpan.FromSeconds(5),
-                tags: ["db", "ready"]
+                tags: new List<string> { "db", "ready" }
         );
     }
 

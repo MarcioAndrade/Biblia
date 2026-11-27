@@ -118,3 +118,60 @@ jobs:
           local-dir: ./Release/
           server-dir: www/api-biblia/
           dangerous-clean-slate: false
+
+      - name: Verify API health
+        shell: bash
+        run: |
+          response_file=$(mktemp)
+          trap 'rm -f "$response_file"' EXIT
+
+          for attempt in 1 2 3; do
+            echo "Health check attempt ${attempt}/3: https://api-biblia.marciocosta.eti.br/health"
+
+            if http_status=$(curl --location --silent --show-error \
+              --output "$response_file" \
+              --write-out '%{http_code}' \
+              'https://api-biblia.marciocosta.eti.br/health'); then
+              curl_exit=0
+            else
+              curl_exit=$?
+            fi
+
+            echo "Response body:"
+            if [ -s "$response_file" ]; then
+              cat "$response_file"
+            else
+              echo "<empty>"
+            fi
+            echo
+            echo "HTTP status: ${http_status:-unavailable}; curl exit code: ${curl_exit}"
+
+            if [ "$curl_exit" -eq 0 ] && [ "$http_status" = "200" ] \
+              && jq -e '
+                type == "object" and
+                .status == "Healthy" and
+                (.totalDuration | type == "string") and
+                (.entries | type == "object") and
+                (.entries.BancoDeDados | type == "object") and
+                .entries.BancoDeDados.status == "Healthy" and
+                (.entries.BancoDeDados.duration | type == "string") and
+                (.entries.BancoDeDados.tags | type == "array") and
+                (.entries.BancoDeDados.data | type == "object")
+              ' "$response_file" > /dev/null; then
+              echo "Health check passed."
+              exit 0
+            fi
+
+            echo "Health check did not return the expected healthy response."
+            if [ "$attempt" -lt 3 ]; then
+              delay=2
+              if [ "$attempt" -eq 2 ]; then
+                delay=5
+              fi
+              echo "Retrying in ${delay} seconds..."
+              sleep "$delay"
+            fi
+          done
+
+          echo "Health check failed after 3 attempts."
+          exit 1

@@ -2,7 +2,13 @@
 
   <PropertyGroup>
 	  <TargetFramework>net6.0</TargetFramework>
+	  <AspNetCoreHostingModel>outofprocess</AspNetCoreHostingModel>
   </PropertyGroup>
+	
+	<ItemGroup>
+		<Content Update="appsettings.Development.json" CopyToPublishDirectory="Never" />
+		<Content Update="appsettings.Production.json" CopyToPublishDirectory="Never" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.89" />

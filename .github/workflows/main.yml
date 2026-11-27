@@ -5,21 +5,116 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 15
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 2.1        
-                
-    - name: Build com o utilitario dotnet
-      run: dotnet build ./src --configuration Release
-    
-    - name: Testes
-      run: dotnet test ./src
-      
+      - uses: actions/checkout@v4
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+      - name: Build solution
+        run: dotnet build src/Biblia/Biblia.sln --configuration Release
+
+  teste-api:
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+      - name: Testes da API
+        run: dotnet test testes/Biblia.API.Tests/Biblia.API.Tests.csproj --configuration Release --verbosity minimal
+
+  teste-app:
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+      - name: Testes da aplicação
+        run: dotnet test testes/Biblia.App.Tests/Biblia.App.Tests.csproj --configuration Release --verbosity minimal
+
+  teste-dominio:
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+      - name: Testes do domínio
+        run: dotnet test testes/Biblia.Domain.Tests/Biblia.Domain.Tests.csproj --configuration Release --verbosity minimal
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build, teste-api, teste-app, teste-dominio]
+    timeout-minutes: 20
+    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Publish API
+        run: dotnet publish src/Biblia/Biblia.API/Biblia.API.csproj --configuration Release --output ./Release -p:DebugType=None -p:DebugSymbols=false
+
+      - name: Validate deployment secrets
+        shell: bash
+        env:
+          BIBLIA_CONNECTION: ${{ secrets.MARCIOCOSTA_BIBLIA_CONNECTION }}
+          FTP_HOST: ${{ secrets.MARCIOCOSTA_FTP_HOST }}
+          FTP_USER: ${{ secrets.MARCIOCOSTA_FTP_USER }}
+          FTP_PASS: ${{ secrets.MARCIOCOSTA_FTP_PASS }}
+        run: |
+          : "${BIBLIA_CONNECTION:?Missing MARCIOCOSTA_BIBLIA_CONNECTION secret}"
+          : "${FTP_HOST:?Missing MARCIOCOSTA_FTP_HOST secret}"
+          : "${FTP_USER:?Missing MARCIOCOSTA_FTP_USER secret}"
+          : "${FTP_PASS:?Missing MARCIOCOSTA_FTP_PASS secret}"
+          test -f ./Release/appsettings.json
+
+      - name: Configure production connection string
+        shell: bash
+        env:
+          BIBLIA_CONNECTION: ${{ secrets.MARCIOCOSTA_BIBLIA_CONNECTION }}
+        run: |
+          jq \
+            --arg conn "$BIBLIA_CONNECTION" \
+            '.ConnectionStrings.BibliaConn = $conn' \
+            ./Release/appsettings.json > ./Release/appsettings.json.tmp
+          mv ./Release/appsettings.json.tmp ./Release/appsettings.json
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:
+          server: ${{ secrets.MARCIOCOSTA_FTP_HOST }}
+          username: ${{ secrets.MARCIOCOSTA_FTP_USER }}
+          password: ${{ secrets.MARCIOCOSTA_FTP_PASS }}
+          protocol: ftp
+          port: 21
+          local-dir: ./Release/
+          server-dir: www/api-biblia/
+          dangerous-clean-slate: false
